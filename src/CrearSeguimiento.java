@@ -38,7 +38,7 @@ public class CrearSeguimiento extends JPanel {
 		barra.add(lblTema);
 		
 		JComboBox<String> temacmbBox = new JComboBox<String>();
-		for (String tema: temaDAO.listarTemas()) {
+		for (String tema: temaDAO.listarTemasPorCodigo()) {
 
 			temacmbBox.addItem(tema);
 		}
@@ -140,7 +140,7 @@ public class CrearSeguimiento extends JPanel {
 		btnAceptar.setBounds(513, 355, 94, 23);
 		btnAceptar.addActionListener(event -> {
 			
-			Seguimiento seguimiento = new Seguimiento((String)temacmbBox.getSelectedItem(),(String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), (String)apreciaciontxtArea.getText());
+			Seguimiento seguimiento = new Seguimiento((String)temacmbBox.getSelectedItem(), (String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), (String)apreciaciontxtArea.getText());
 			seguimientoDAO.agregarSeguimiento(seguimiento);
 			marco.setContentPane(new Consulta(marco));
 			marco.validate(); 

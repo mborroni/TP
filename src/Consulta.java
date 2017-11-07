@@ -24,6 +24,7 @@ public class Consulta extends JSplitPane {
 	private JButton btnCrearSeguimiento;
 	private JButton btnModificar;
 	private JButton btnEliminar;
+	private JButton btnDetalle;
 	private static DefaultTableModel model;
 	private JTable table;
 	private TemaDAO temaDAO = new TemaDAO();
@@ -129,7 +130,7 @@ public class Consulta extends JSplitPane {
 
 		filtrarCmbBox = new JComboBox<String>();
 		filtrarCmbBox.addItem("");
-		for (String filtro : temaDAO.listarTemas()) {
+		for (String filtro : temaDAO.listarTemasPorPalabraClave()) {
 			filtrarCmbBox.addItem(filtro);
 		}
 		filtrarCmbBox.setBounds(20, 43, 144, 20);
@@ -200,7 +201,7 @@ public class Consulta extends JSplitPane {
 
 		btnEliminar = new JButton("Eliminar tema");
 		btnEliminar.setHorizontalAlignment(SwingConstants.LEFT);
-		btnEliminar.setBounds(3, 214, 155, 33);
+		btnEliminar.setBounds(0, 212, 155, 33);
 		btnEliminar.setIcon(new ImageIcon(this.getClass().getResource("/Eliminar.png")));
 		btnEliminar.setOpaque(false);
 		btnEliminar.setContentAreaFilled(false);
@@ -215,7 +216,7 @@ public class Consulta extends JSplitPane {
 							"Eliminar", JOptionPane.YES_NO_OPTION);
 					if (m == JOptionPane.YES_OPTION && table.getSelectedRow() != -1) {
 				            //model.removeRow(table.getSelectedRow());
-				            // temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0.toString());
+				            // temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 				            temaDAO.eliminarTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 				            agregarTemas(temaDAO.obtenerTemas());
 				            }
@@ -226,6 +227,26 @@ public class Consulta extends JSplitPane {
 			});
 		
 		panel.add(btnEliminar);
+		
+		btnDetalle = new JButton("Detalles");
+		btnDetalle.setHorizontalAlignment(SwingConstants.LEFT);
+		btnDetalle.setBounds(3, 256, 155, 33);
+		btnDetalle.setIcon(new ImageIcon(this.getClass().getResource("/more.png")));
+		btnDetalle.setOpaque(false);
+		btnDetalle.setContentAreaFilled(false);
+		btnDetalle.setBorderPainted(false);
+		btnDetalle.addActionListener(new ActionListener() {
+			 @Override
+			    public void actionPerformed(ActionEvent arg0) {
+			    
+				 Tema tema = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+				 
+				 marco.setContentPane(new Detalle(marco, tema));
+				 marco.validate();
+			 	}
+			 
+			 });
+		panel.add(btnDetalle);
 	}
 
 	public static void agregarTemas(ArrayList<Tema> temas) {

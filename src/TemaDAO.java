@@ -78,10 +78,10 @@ public class TemaDAO {
 	}
 	
 	/*
-	 * LISTAR TEMAS
+	 * LISTAR TEMAS POR PALABRA CLAVE
 	 */
 	
-	public ArrayList<String> listarTemas() {
+	public ArrayList<String> listarTemasPorPalabraClave() {
 		
 		ArrayList<String> temas = new ArrayList<String>();
 		try{
@@ -89,6 +89,26 @@ public class TemaDAO {
 			rs = stmt.executeQuery("SELECT palabra_clave FROM tema");
 			while (rs.next()) {
 				String codigo = (rs.getString("palabra_clave"));
+				temas.add(codigo);
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		return temas;
+	}
+	
+	/*
+	 * LISTAR TEMAS POR CODIGO
+	 */
+	
+	public ArrayList<String> listarTemasPorCodigo() {
+		
+		ArrayList<String> temas = new ArrayList<String>();
+		try{
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT cod_tema FROM tema");
+			while (rs.next()) {
+				String codigo = (rs.getString("cod_tema"));
 				temas.add(codigo);
 			}
 		} catch (SQLException e) {
