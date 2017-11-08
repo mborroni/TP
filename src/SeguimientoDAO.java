@@ -40,7 +40,7 @@ public class SeguimientoDAO {
 			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 			preparedStmt.setString(1, seguimiento.getCodigo());
 			preparedStmt.setInt(2, id_operador);
-			preparedStmt.setInt(3, seguimiento.getMinsTelevion());
+			preparedStmt.setInt(3, seguimiento.getMinsTelevision());
 			preparedStmt.setInt(4, seguimiento.getMinsHorarioCentral());
 			preparedStmt.setInt(5, seguimiento.getCantNotasDiarios());
 			preparedStmt.setInt(6, seguimiento.getCantTapasRevistas());
