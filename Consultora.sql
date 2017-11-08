@@ -29,7 +29,18 @@ foreign key (cod_tema) references tema(cod_tema),
 foreign key (id_operador) references operador(id_operador)
 );
 
+create table redes_sociales (
+red_social varchar (20) primary key,
+cod_seguimiento int,
+pub_apoyo int,
+pub_rechazo int,
+pub_neutral int,
+replicas int,
+mg int,
+foreign key (cod_seguimiento) references seguimiento(cod_seguimiento)
+);
 
+select * from seguimiento;
 insert into operador (nombre, apellido) values ("Ramiro","Capria");
 insert into operador (nombre, apellido) values ("Gabriel","Gimenez");
 insert into operador (nombre, apellido) values ("Francisco","Piccina");

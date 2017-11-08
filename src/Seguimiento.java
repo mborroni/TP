@@ -1,6 +1,7 @@
 
 public class Seguimiento {
 
+	private int cod_seguimiento;
 	private String codigo;
 	private String operador;
 	private int minsTelevion;
@@ -9,15 +10,25 @@ public class Seguimiento {
 	private int cantTapasRevistas;
 	private String apreciacion;
 
-	public Seguimiento(String codigo, String operador, int minsTelevion, int minsHorarioCentral, int cantNotasDiarios,
+	public Seguimiento(String cod_tema, String operador, int minsTelevion, int minsHorarioCentral, int cantNotasDiarios,
 			int cantTapasRevistas, String apreciacion) {
-		this.codigo = codigo;
+		this.codigo = cod_tema;
 		this.operador = operador;
 		this.minsTelevion = minsTelevion;
 		this.minsHorarioCentral = minsHorarioCentral;
 		this.cantNotasDiarios = cantNotasDiarios;
 		this.cantTapasRevistas = cantTapasRevistas;
 		this.apreciacion = apreciacion;
+	}
+
+
+	public int getCod_seguimiento() {
+		return cod_seguimiento;
+	}
+
+
+	public void setCod_seguimiento(int cod_seguimiento) {
+		this.cod_seguimiento = cod_seguimiento;
 	}
 
 

@@ -5,7 +5,6 @@
 /App$4.class
 /App$5.class
 /App$6.class
-/App$7.class
 /App.class
 /Consulta$1.class
 /Consulta$2.class
@@ -17,8 +16,16 @@
 /Consulta$8.class
 /Consulta$9.class
 /Consulta.class
+/Crear$1.class
+/Crear$2.class
 /Crear.class
+/CrearSeguimiento$1.class
+/CrearSeguimiento$2.class
 /CrearSeguimiento.class
+/Detalle$1.class
+/Detalle$2.class
+/Detalle$3.class
+/Detalle$4.class
 /Detalle.class
 /Eliminar.png
 /Modificar.png
@@ -31,10 +38,4 @@
 /Tema.class
 /TemaDAO.class
 /home.png
-/more.png
 /searcher1.png
-/Detalle$1.class
-/CrearSeguimiento$1.class
-/CrearSeguimiento$2.class
-/Crear$1.class
-/Crear$2.class

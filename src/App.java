@@ -104,46 +104,6 @@ public class App extends JFrame {
 			}
 		});
 
-		////////////////////////////////////////////////////////////////////
-		/*
-		// Menu > Editar
-		JMenu mnEditar = new JMenu("Editar");
-		menuBar.add(mnEditar);
-
-		// Tema
-		JMenuItem mntmTema_1 = new JMenuItem("Tema");
-		mntmTema_1.setPreferredSize(new Dimension(100, mntmTema_1.getPreferredSize().height));
-		mnEditar.add(mntmTema_1);
-		mntmTema_1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				//marco.setContentPane(new Modificar(marco));
-				//marco.validate();
-			}
-		});
-
-		// Seguimiento
-		JMenuItem mntmSeguimiento_1 = new JMenuItem("Seguimiento");
-		mnEditar.add(mntmSeguimiento_1);
-
-		JSeparator separator_1 = new JSeparator();
-		mnEditar.add(separator_1);
-
-		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
-		mnEditar.add(mntmEliminar);
-
-		mntmSeguimiento_1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// marco.setContentPane(new ModificarSeguimiento(marco));
-				// marco.validate();
-			}
-		});
-		 */
-		////////////////////////////////////////////////////////////////////
-
 		// Menu > Consulta
 		JMenu mnConsulta = new JMenu("Consultas");
 		menuBar.add(mnConsulta);

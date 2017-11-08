@@ -33,7 +33,7 @@ public class TemaDAO {
 
 		try {
 
-			String query = " insert into tema (cod_tema, palabra_clave, descripcion, fecha_inicio, fecha_fin)"
+			String query = " INSERT INTO tema (cod_tema, palabra_clave, descripcion, fecha_inicio, fecha_fin)"
 					+ " values (?, ?, ?, ?, ?)";
 
 			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
