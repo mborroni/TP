@@ -27,21 +27,31 @@ import javax.swing.JComboBox;
 
 public class Detalle extends JSplitPane {
 
+	// TEMA
 	private JTextField codigoTema;
 	private JTextField palabraClave;
 	private JDateChooser fechaInicio;
 	private JDateChooser fechaFin;
+	private JTextArea descripcionTxtArea;
+	
+	// BUSQUEDA SEGUIMIENTOS
+	private JTextField buscarTxtField;
+	private JComboBox<String> operadorCmbBox;
+	private static DefaultTableModel model;
+	private JTable table;
+	
+	// SEGUIMIENTOS
 	private JTextField televisiontxtField;
 	private JTextField hscentraltxtField;
 	private JTextField notasDiariostxtField;
-
 	private JTextField tapasRevistatxtField;
-	private static DefaultTableModel model;
-	private JTable table;
+	private JTextArea apreciaciontxtArea;
+	
+	//DAOS
 	private OperadorDAO operadorDAO = new OperadorDAO();
 	private SeguimientoDAO seguimientoDAO = new SeguimientoDAO();
 	private Tema tema = null;
-	private JTextField buscarTxtField;
+
 
 	public Detalle() { //Tema tema
 		
@@ -64,7 +74,6 @@ public class Detalle extends JSplitPane {
 		barra.add(lblCodigo);
 
 		codigoTema = new JTextField("123ABC");
-		codigoTema.setEditable(false);
 		codigoTema.setBounds(352, 11, 142, 20);
 		codigoTema.setFont(new Font("Calibri", Font.PLAIN, 20));
 		codigoTema.setBorder(null);
@@ -81,7 +90,6 @@ public class Detalle extends JSplitPane {
 		palabraClave.setFont(new Font("Calibri", Font.PLAIN, 17));
 		palabraClave.setBorder(null);
 		palabraClave.setBackground(new Color(65, 182, 94));
-		palabraClave.setEnabled(false);
 		barra.add(palabraClave);
 		
 		JLabel lblDesde = new JLabel("Desde");
@@ -95,7 +103,6 @@ public class Detalle extends JSplitPane {
 		JTextFieldDateEditor editorInicio = (JTextFieldDateEditor) fechaInicio.getDateEditor();
 		editorInicio.setBorder(null);
 		editorInicio.setBackground(new Color(65, 182, 94));
-		fechaInicio.setEnabled(false);
 		barra.add(fechaInicio);
 
 		JLabel lblHasta = new JLabel("Hasta");
@@ -108,10 +115,7 @@ public class Detalle extends JSplitPane {
 		JTextFieldDateEditor editorFin = (JTextFieldDateEditor) fechaFin.getDateEditor();
 		editorFin.setBorder(null);
 		editorFin.setBackground(new Color(65, 182, 94));
-		fechaFin.setEnabled(false);
 		barra.add(fechaFin);
-
-		
 
 		/*
 		 * DETALLES 
@@ -144,13 +148,14 @@ public class Detalle extends JSplitPane {
 		scrollPane.setBounds(371, 38, 340, 326);
 		scrollPane.setViewportBorder(null);
 		scrollPane.getViewport().setBackground(new Color(252, 252, 252));;
+		panel.add(scrollPane);
 		
 		buscarTxtField = new JTextField();
 		buscarTxtField.setBounds(371, 9, 197, 20);
 		panel.add(buscarTxtField);
 		buscarTxtField.setColumns(10);
 		
-		JComboBox operadorCmbBox = new JComboBox();
+		operadorCmbBox = new JComboBox<String>();
 		operadorCmbBox.setBounds(578, 9, 133, 20);
 		operadorCmbBox.addItem("Todos");
 		JComboBox<String> operadorcmbBox = new JComboBox<String>();
@@ -160,11 +165,9 @@ public class Detalle extends JSplitPane {
 		}
 		panel.add(operadorCmbBox);
 
-		panel.add(scrollPane);
+
 		
-		JTextArea descripcionTxtArea = new JTextArea();
-		descripcionTxtArea.setEnabled(false);
-		
+		descripcionTxtArea = new JTextArea();
 		JScrollPane scrollpane = new JScrollPane(descripcionTxtArea);
 		scrollpane.setBounds(21, 38, 331, 42);;
 		
@@ -188,7 +191,6 @@ public class Detalle extends JSplitPane {
 		panel.add(lblDeTelevisin);
 		
 		televisiontxtField = new JTextField();
-		televisiontxtField.setEnabled(false);
 		televisiontxtField.setBounds(175, 115, 126, 20);
 		panel.add(televisiontxtField);
 		televisiontxtField.setColumns(10);
@@ -199,7 +201,6 @@ public class Detalle extends JSplitPane {
 		panel.add(lblEnHorarioCentral);
 		
 		hscentraltxtField = new JTextField();
-		hscentraltxtField.setEnabled(false);
 		hscentraltxtField.setBounds(175, 142, 126, 20);
 		panel.add(hscentraltxtField);
 		hscentraltxtField.setColumns(10);
@@ -215,7 +216,6 @@ public class Detalle extends JSplitPane {
 		panel.add(lblNotasEnDiarios);
 		
 		notasDiariostxtField = new JTextField();
-		notasDiariostxtField.setEnabled(false);
 		notasDiariostxtField.setBounds(175, 192, 126, 20);
 		panel.add(notasDiariostxtField);
 		notasDiariostxtField.setColumns(10);
@@ -226,7 +226,6 @@ public class Detalle extends JSplitPane {
 		panel.add(lblTapasDeRevista);
 		
 		tapasRevistatxtField = new JTextField();
-		tapasRevistatxtField.setEnabled(false);
 		tapasRevistatxtField.setBounds(175, 220, 126, 20);
 		panel.add(tapasRevistatxtField);
 		tapasRevistatxtField.setColumns(10);
@@ -236,8 +235,7 @@ public class Detalle extends JSplitPane {
 		lblApreciacin.setBounds(21, 248, 89, 19);
 		panel.add(lblApreciacin);
 		
-		JTextArea apreciaciontxtArea = new JTextArea();
-		apreciaciontxtArea.setEnabled(false);
+		apreciaciontxtArea = new JTextArea();
 		JScrollPane scrollpane1 = new JScrollPane(apreciaciontxtArea);
 		scrollpane1.setBounds(22, 271, 331, 93);
 		panel.add(scrollpane1);
@@ -286,6 +284,23 @@ public class Detalle extends JSplitPane {
 		
 	}
 
+	public void nonEditable(){
+		codigoTema.setEditable(false);
+		palabraClave.setEnabled(false);
+		fechaInicio.setEnabled(false);
+		fechaFin.setEnabled(false);
+		descripcionTxtArea.setEnabled(false);
+		televisiontxtField.setEnabled(false);
+		hscentraltxtField.setEnabled(false);
+		notasDiariostxtField.setEnabled(false);
+		tapasRevistatxtField.setEnabled(false);
+		apreciaciontxtArea.setEnabled(false);	
+	}
+	
+	public void editable(){
+		
+	}
+	
 	public static void agregarSeguimientos(ArrayList<Seguimiento> seguimientos) {
 		model.setRowCount(0);
 		for (int i = 0; i < seguimientos.size(); i++) {
