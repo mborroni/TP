@@ -1,5 +1,8 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -14,7 +17,7 @@ public class CrearSeguimiento extends JPanel {
 	private SeguimientoDAO seguimientoDAO = new SeguimientoDAO();
 	private OperadorDAO operadorDAO = new OperadorDAO();
 
-	public CrearSeguimiento(JFrame marco){
+	public CrearSeguimiento(){
 		
 		setLayout(null);
 
@@ -130,21 +133,31 @@ public class CrearSeguimiento extends JPanel {
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(617, 355, 94, 23);
-		btnCancelar.addActionListener(event -> {
-			marco.setContentPane(new Consulta(marco));
-			marco.validate();
+		btnCancelar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				frame.setContentPane(new Consulta()); 
+				frame.validate();
+			}
 		});
 		panel.add(btnCancelar);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(513, 355, 94, 23);
-		btnAceptar.addActionListener(event -> {
-			
-			Seguimiento seguimiento = new Seguimiento((String)temacmbBox.getSelectedItem(), (String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), (String)apreciaciontxtArea.getText());
-			seguimientoDAO.agregarSeguimiento(seguimiento);
-			marco.setContentPane(new Consulta(marco));
-			marco.validate(); 
-			
+		btnAceptar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Seguimiento seguimiento = new Seguimiento((String)temacmbBox.getSelectedItem(), (String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), (String)apreciaciontxtArea.getText());
+				seguimientoDAO.agregarSeguimiento(seguimiento);
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				frame.setContentPane(new Consulta()); 
+				frame.validate();
+			}
 		});
 		panel.add(btnAceptar);
 

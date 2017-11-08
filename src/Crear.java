@@ -3,7 +3,10 @@ import javax.swing.*;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 @SuppressWarnings("serial")
@@ -20,7 +23,7 @@ public class Crear extends JPanel {
 	
 	private TemaDAO temaDAO = new TemaDAO();
 		
-	public Crear(JFrame marco) {
+	public Crear() {
 
 		setLayout(null);
 
@@ -101,22 +104,34 @@ public class Crear extends JPanel {
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(617, 355, 94, 23);
-		btnCancelar.addActionListener(event -> {
-			marco.setContentPane(new Consulta(marco));
-			marco.validate();
+		btnCancelar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				frame.setContentPane(new Consulta()); 
+				frame.validate();
+			}
 		});
 		panel.add(btnCancelar);
 
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(513, 355, 94, 23);
-		btnAceptar.addActionListener(event -> {
-			
+		btnAceptar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
 			Tema tema = new Tema(codigotxtFld.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText());
 			temaDAO.agregarTema(tema);
-		
-			marco.setContentPane(new Consulta(marco));
-			marco.validate();
+
+			JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+			frame.setContentPane(new Consulta()); 
+			frame.validate();
+			}
 		});
+		
 		panel.add(btnAceptar);
 	}
 }

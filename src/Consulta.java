@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,6 @@ public class Consulta extends JSplitPane {
 	private JTextField busquedaTxtFld;
 	private JButton imagebutton;
 	private JLabel lblConsultas;
-	
 	private JLabel lblFiltrar;
 	private JComboBox<String> filtrarCmbBox;
 	private JButton btnCrearTema;
@@ -29,7 +29,7 @@ public class Consulta extends JSplitPane {
 	private JTable table;
 	private TemaDAO temaDAO = new TemaDAO();
 
-	public Consulta(JFrame marco) {
+	public Consulta() {
 
 		setLayout(null);
 
@@ -163,8 +163,9 @@ public class Consulta extends JSplitPane {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				marco.setContentPane(new Crear(marco));
-				marco.validate();
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				frame.setContentPane(new Crear()); 
+				frame.validate();
 			}
 		});
 		panel.add(btnCrearTema);
@@ -183,9 +184,10 @@ public class Consulta extends JSplitPane {
 		btnCrearSeguimiento.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new CrearSeguimiento(marco));
-				marco.validate();
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				frame.setContentPane(new CrearSeguimiento()); 
+				frame.validate();
 			}
 		});
 		panel.add(btnCrearSeguimiento);
@@ -239,10 +241,15 @@ public class Consulta extends JSplitPane {
 			 @Override
 			    public void actionPerformed(ActionEvent arg0) {
 			    
-				 Tema tema = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
-				 
-				 marco.setContentPane(new Detalle(marco, tema));
-				 marco.validate();
+				 if (table.getSelectedRow() == -1){
+					 JOptionPane.showMessageDialog(null, "No seleccionó ningun tema.");	
+					}
+					else {
+						 Tema tema = (temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(),0).toString()));
+						 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
+						 frame.setContentPane(new Detalle(tema)); 
+						 frame.validate();
+					}
 			 	}
 			 
 			 });

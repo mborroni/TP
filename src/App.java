@@ -2,6 +2,7 @@ import javax.swing.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,22 +11,35 @@ import java.awt.event.ActionListener;
 
 public class App extends JFrame {
 	
-	public App() {
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					App frame = new App();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
-	public static void main(String[] args) {
+	public App() {
 
-		JFrame marco = new JFrame();
-		marco.setFont(new Font("Calibri", Font.PLAIN, 13));
-		marco.setTitle("Consultora");
-		ImageIcon img = (new ImageIcon(marco.getClass().getResource("/home.png")));
-		marco.setIconImage(img.getImage());
-		marco.setVisible(true);
-		marco.setSize(750, 550);
-		marco.setResizable(false);
-		marco.setLocationRelativeTo(null);
-		marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFont(new Font("Calibri", Font.PLAIN, 13));
+		setTitle("Consultora");
+		ImageIcon img = (new ImageIcon(this.getClass().getResource("/home.png")));
+		setIconImage(img.getImage());
+		setSize(750, 550);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		setContentPane(new Consulta());
+		validate();
+
+		
 		// Menu
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorder(null);
@@ -36,7 +50,7 @@ public class App extends JFrame {
 		UIManager.put("Menu.font", f);
 		UIManager.put("MenuItem.font", f);
 
-		marco.setJMenuBar(menuBar);
+		setJMenuBar(menuBar);
 
 		// Menu > Archivo
 		JMenu mnArchivo = new JMenu("Archivo");
@@ -56,8 +70,8 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new Crear(marco)); // CrearTema
-				marco.validate();
+				setContentPane(new Crear()); // CrearTema
+				validate();
 			}
 		});
 
@@ -69,8 +83,8 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new CrearSeguimiento(marco));//Crear Seguimiento
-				marco.validate();
+				setContentPane(new CrearSeguimiento());//Crear Seguimiento
+				validate();
 			}
 		});
 
@@ -85,13 +99,13 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setVisible(false);
+				setVisible(false);
 				System.exit(1);
 			}
 		});
 
 		////////////////////////////////////////////////////////////////////
-
+		/*
 		// Menu > Editar
 		JMenu mnEditar = new JMenu("Editar");
 		menuBar.add(mnEditar);
@@ -127,7 +141,7 @@ public class App extends JFrame {
 				// marco.validate();
 			}
 		});
-
+		 */
 		////////////////////////////////////////////////////////////////////
 
 		// Menu > Consulta
@@ -142,8 +156,8 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new Consulta(marco));
-				marco.validate();
+				setContentPane(new Consulta());
+				validate();
 			}
 		});
 
@@ -169,8 +183,7 @@ public class App extends JFrame {
 			}
 		});
 
-		marco.setContentPane(new Consulta(marco));
-		marco.validate();
+		
 	}
 
 

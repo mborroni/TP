@@ -1,6 +1,7 @@
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -50,5 +51,24 @@ public class SeguimientoDAO {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
+	
+	public ArrayList<Seguimiento> obtenerSeguimientos(){
+		
+		
+		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
+		try{
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
+					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador");
+			while (rs.next()) {
+				Seguimiento seguimiento = new Seguimiento(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv") , rs.getInt("mincentral"),	rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				seguimientos.add(seguimiento);
+			}
+		} catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e);
+		}
+		return seguimientos;
+	}
+	
 	
 }
