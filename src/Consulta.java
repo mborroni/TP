@@ -14,7 +14,8 @@ import javax.swing.table.DefaultTableModel;
 @SuppressWarnings("serial")
 
 public class Consulta extends JSplitPane {
-
+	
+	//CONSULTA
 	private JTextField busquedaTxtFld;
 	private JButton imagebutton;
 	private JLabel lblConsultas;
@@ -25,9 +26,15 @@ public class Consulta extends JSplitPane {
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnDetalle;
+	
+	//JTABLE
 	private static DefaultTableModel model;
 	private JTable table;
+	
+	//DAOS
 	private TemaDAO temaDAO = new TemaDAO();
+	
+	public static boolean isEditable;
 
 	public Consulta() {
 
@@ -200,6 +207,25 @@ public class Consulta extends JSplitPane {
 		btnModificar.setOpaque(false);
 		btnModificar.setContentAreaFilled(false);
 		btnModificar.setBorderPainted(false);
+		btnModificar.addActionListener(new ActionListener() {
+			 @Override
+			    public void actionPerformed(ActionEvent arg0) {
+			    
+				 if (table.getSelectedRow() != -1){
+					 	
+					 	setEditable(true);
+					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
+						frame.setContentPane(new Detalle()); 
+						frame.validate();
+						
+					} 
+				 else {
+					 JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnDetalle),
+								"No seleccionó ningún tema.", "Error", JOptionPane.ERROR_MESSAGE);
+				 }
+			 	}
+			 
+			 });
 		panel.add(btnModificar);
 
 		btnEliminar = new JButton("Eliminar tema");
@@ -242,7 +268,8 @@ public class Consulta extends JSplitPane {
 			    public void actionPerformed(ActionEvent arg0) {
 			    
 				 if (table.getSelectedRow() != -1){
-					 				
+					 	
+					 	setEditable(true);
 					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
 						frame.setContentPane(new Detalle()); 
 						frame.validate();
@@ -268,6 +295,14 @@ public class Consulta extends JSplitPane {
 			model.addRow(v);
 	
 		}
+	}
+
+	public boolean isEditable() {
+		return isEditable;
+	}
+
+	public void setEditable(boolean isEditable) {
+		this.isEditable = isEditable;
 	}
 
 }

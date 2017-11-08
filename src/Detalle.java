@@ -47,13 +47,26 @@ public class Detalle extends JSplitPane {
 	private JTextField tapasRevistatxtField;
 	private JTextArea apreciaciontxtArea;
 	
+	private JButton btnCancelar;
+	private JButton btnAceptar;
+	private JButton btnAplicar;
+	
 	//DAOS
 	private OperadorDAO operadorDAO = new OperadorDAO();
 	private SeguimientoDAO seguimientoDAO = new SeguimientoDAO();
 	private Tema tema = null;
-
-
+	
 	public Detalle() { //Tema tema
+		
+		/*
+		if(Consulta.isEditable() == true) {
+			this.editable();
+		}
+		else {
+			this.nonEditable();
+		}
+		*/
+	
 		
 		setLayout(null);
 		
@@ -240,7 +253,7 @@ public class Detalle extends JSplitPane {
 		scrollpane1.setBounds(22, 271, 331, 93);
 		panel.add(scrollpane1);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(616, 372, 94, 23);
 		btnCancelar.addActionListener(new ActionListener() {
 
@@ -254,7 +267,7 @@ public class Detalle extends JSplitPane {
 		});
 		panel.add(btnCancelar);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(512, 372, 94, 23);
 		btnAceptar.addActionListener(new ActionListener() {
 
@@ -268,8 +281,8 @@ public class Detalle extends JSplitPane {
 		});
 		panel.add(btnAceptar);
 		
-		JButton btnAplicar = new JButton("Aplicar");
-		btnAplicar.setEnabled(false);
+		btnAplicar = new JButton("Aplicar");
+		
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -294,11 +307,22 @@ public class Detalle extends JSplitPane {
 		hscentraltxtField.setEnabled(false);
 		notasDiariostxtField.setEnabled(false);
 		tapasRevistatxtField.setEnabled(false);
-		apreciaciontxtArea.setEnabled(false);	
+		apreciaciontxtArea.setEnabled(false);
+		btnAplicar.setEnabled(false);
 	}
 	
 	public void editable(){
-		
+		codigoTema.setEditable(true);
+		palabraClave.setEnabled(true);
+		fechaInicio.setEnabled(true);
+		fechaFin.setEnabled(true);
+		descripcionTxtArea.setEnabled(true);
+		televisiontxtField.setEnabled(true);
+		hscentraltxtField.setEnabled(true);
+		notasDiariostxtField.setEnabled(true);
+		tapasRevistatxtField.setEnabled(true);
+		apreciaciontxtArea.setEnabled(true);	
+		btnAplicar.setEnabled(true);
 	}
 	
 	public static void agregarSeguimientos(ArrayList<Seguimiento> seguimientos) {
