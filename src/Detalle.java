@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -22,6 +24,7 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 
 @SuppressWarnings("serial")
 
@@ -283,8 +286,28 @@ public class Detalle extends JSplitPane {
 		
 		btnAplicar = new JButton("Aplicar");
 		
+		//EDITAR >> https://stackoverflow.com/questions/14153544/jtable-how-to-update-cell-using-custom-editor-by-pop-up-input-dialog-box/14176961
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JTextField firstName = new JTextField("holab");
+				JTextArea descripcion = new JTextArea("hola");
+				descripcion.setBounds(0, 0, 200, 200);
+				final JComponent[] inputs = new JComponent[] {
+				        new JLabel("Palabra Clave"),
+				        firstName,
+				        new JLabel("Descripcion"),
+				        descripcion
+
+				};
+				int result = JOptionPane.showConfirmDialog(null, inputs, "Editar", JOptionPane.PLAIN_MESSAGE);
+				if (result == JOptionPane.OK_OPTION) {
+				    System.out.println("You entered " +
+				            firstName.getText() + ", " +
+				            descripcion.getText() + ", " );
+				            
+				} else {
+				    System.out.println("User canceled / closed the dialog, result = " + result);
+				}
 				
 			}
 		});

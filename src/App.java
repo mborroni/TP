@@ -35,7 +35,6 @@ public class App extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		setContentPane(new Consulta());
 		validate();
 
