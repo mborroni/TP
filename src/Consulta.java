@@ -297,7 +297,7 @@ public class Consulta extends JSplitPane {
 		}
 	}
 
-	public boolean isEditable() {
+	public static boolean isEditable() {
 		return isEditable;
 	}
 

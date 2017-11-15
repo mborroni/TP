@@ -36,5 +36,5 @@ public class Seguimiento {
 		this.operador = operador;
 	}
 
-
+	
 }

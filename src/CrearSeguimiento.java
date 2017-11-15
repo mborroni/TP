@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.xml.bind.ParseConversionEvent;
 
 @SuppressWarnings("serial")
 
@@ -14,6 +13,8 @@ public class CrearSeguimiento extends JPanel {
 	private JTextField hscentraltxtField;
 	private JTextField notasDiariostxtField;
 	private JTextField tapasRevistatxtField;
+	
+	
 	private TemaDAO temaDAO = new TemaDAO();
 	private SeguimientoDAO seguimientoDAO = new MediosTradicionalesDAO();
 	private OperadorDAO operadorDAO = new OperadorDAO();

@@ -9,7 +9,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
-public class Medio                                                                                                                                                                                                                                                                                                                                                                                                                    sTradicionalesDAO extends SeguimientoDAO{
+public class MediosTradicionalesDAO extends SeguimientoDAO{
 	
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
@@ -25,8 +25,10 @@ public class Medio                                                              
 		}
 	}
 	
-	public void agregarSeguimiento(MediosTradicionales seguimiento) {
+	public void agregarSeguimiento(Seguimiento seguimiento) {
 
+		MediosTradicionales seguimientoMT = (MediosTradicionales) seguimiento; // cast variable
+		
 		try {
 			int id_operador = 0;
 			String query = " insert into seguimiento (cod_tema, id_operador, mintv, mincentral, cant_notas, cant_tapas, apreciacion)"
@@ -40,16 +42,34 @@ public class Medio                                                              
 			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 			preparedStmt.setString(1, seguimiento.getCodigo());
 			preparedStmt.setInt(2, id_operador);
-			preparedStmt.setInt(3, seguimiento.getMinsTelevision());
-			preparedStmt.setInt(4, seguimiento.getMinsHorarioCentral());
-			preparedStmt.setInt(5, seguimiento.getCantNotasDiarios());
-			preparedStmt.setInt(6, seguimiento.getCantTapasRevistas());
-			preparedStmt.setString(7, seguimiento.getApreciacion());
+			preparedStmt.setInt(3, seguimientoMT.getMinsTelevision());
+			preparedStmt.setInt(4, seguimientoMT.getMinsHorarioCentral());
+			preparedStmt.setInt(5, seguimientoMT.getCantNotasDiarios());
+			preparedStmt.setInt(6, seguimientoMT.getCantTapasRevistas());
+			preparedStmt.setString(7, seguimientoMT.getApreciacion());
 
 			preparedStmt.execute();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
+	}
+	
+	public ArrayList<Seguimiento> buscarSeguimientos(String texto) {
+		
+		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
+		try{
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
+					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador");
+			while(rs.next()){
+				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				seguimientos.add(seguimiento);
+			}
+		} catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
+		return seguimientos;
 	}
 	
 	public ArrayList<Seguimiento> obtenerSeguimientosPorCodigo(String codigo){
@@ -70,17 +90,24 @@ public class Medio                                                              
 		return seguimientos;
 	
 	}
-
-	@Override
-	public ArrayList<Seguimiento> buscarSeguimientos(String texto) {
-		// TODO Apéndice de método generado automáticamente
-		return null;
-	}
-
-	@Override
+	
 	public ArrayList<Seguimiento> buscarSeguimientoPorOp(String apellido) {
-		// TODO Apéndice de método generado automáticamente
-		return null;
+		
+		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
+		try{
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
+					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador) WHERE O.apellido LIKE '" + apellido + "'");
+			while(rs.next()){
+				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"),	rs.getString("apellido"),rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				
+				seguimientos.add(seguimiento);
+			}
+		}catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
+		return seguimientos;
 	}
 
 }

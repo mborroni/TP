@@ -53,8 +53,8 @@ public class Detalle extends JSplitPane {
 	
 	//DAOS
 	private OperadorDAO operadorDAO = new OperadorDAO();
-	private SeguimientoDAO seguimientoDAO = new SeguimientoDAO();
-	private Tema tema = null;
+	private SeguimientoDAO seguimientoDAO = new MediosTradicionalesDAO();
+	//private Tema tema = null;
 	
 	public Detalle() { //Tema tema
 		
