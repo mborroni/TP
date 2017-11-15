@@ -4,14 +4,11 @@ public class Seguimiento {
 	private int cod_seguimiento;
 	private String codigo;
 	private String operador;
-	private String apreciacion;
 	
-	public Seguimiento(String cod_tema, String operador, String apreciacion) {
+	public Seguimiento(String cod_tema, String operador) {
 		this.codigo = cod_tema;
 		this.operador = operador;
-		this.apreciacion = apreciacion;
 	}
-
 
 	public int getCod_seguimiento() {
 		return cod_seguimiento;
@@ -39,13 +36,5 @@ public class Seguimiento {
 		this.operador = operador;
 	}
 
-
-	public String getApreciacion() {
-		return apreciacion;
-	}
-
-	public void setApreciacion(String apreciacion) {
-		this.apreciacion = apreciacion;
-	}
 
 }

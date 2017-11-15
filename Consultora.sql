@@ -30,14 +30,16 @@ foreign key (id_operador) references operador(id_operador)
 );
 
 create table redes_sociales (
+cod_tema varchar(6),
 red_social varchar (20) primary key,
-cod_seguimiento int,
+-- cod_seguimiento int,
 pub_apoyo int,
 pub_rechazo int,
 pub_neutral int,
 replicas int,
 mg int,
-foreign key (cod_seguimiento) references seguimiento(cod_seguimiento)
+foreign key (cod_seguimiento) references seguimiento(cod_seguimiento),
+foreign key (cod_tema) references tema(cod_tema)
 );
 
 select * from seguimiento;

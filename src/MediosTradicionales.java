@@ -5,14 +5,24 @@ public class MediosTradicionales extends Seguimiento{
 	private int minsHorarioCentral;
 	private int cantNotasDiarios;
 	private int cantTapasRevistas;
+	private String apreciacion;
 	
 	public MediosTradicionales(String cod_tema, String operador, int minsTelevion, int minsHorarioCentral,
 			int cantNotasDiarios, int cantTapasRevistas, String apreciacion) {
-		super(cod_tema, operador, apreciacion);
+		super(cod_tema, operador);
 		this.minsTelevision = minsTelevion;
 		this.minsHorarioCentral = minsHorarioCentral;
 		this.cantNotasDiarios = cantNotasDiarios;
 		this.cantTapasRevistas = cantTapasRevistas;
+		this.apreciacion = apreciacion;
+	}
+
+	public String getApreciacion() {
+		return apreciacion;
+	}
+
+	public void setApreciacion(String apreciacion) {
+		this.apreciacion = apreciacion;
 	}
 
 	public int getMinsTelevision() {

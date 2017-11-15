@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.xml.bind.ParseConversionEvent;
 
 @SuppressWarnings("serial")
 
@@ -14,7 +15,7 @@ public class CrearSeguimiento extends JPanel {
 	private JTextField notasDiariostxtField;
 	private JTextField tapasRevistatxtField;
 	private TemaDAO temaDAO = new TemaDAO();
-	private SeguimientoDAO seguimientoDAO = new SeguimientoDAO();
+	private SeguimientoDAO seguimientoDAO = new MediosTradicionalesDAO();
 	private OperadorDAO operadorDAO = new OperadorDAO();
 
 	public CrearSeguimiento(){
@@ -152,7 +153,7 @@ public class CrearSeguimiento extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Seguimiento seguimiento = new Seguimiento((String)temacmbBox.getSelectedItem(), (String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), (String)apreciaciontxtArea.getText());
+				Seguimiento seguimiento = new MediosTradicionales((String)temacmbBox.getSelectedItem(), (String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), (String)apreciaciontxtArea.getText());
 				seguimientoDAO.agregarSeguimiento(seguimiento);
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				frame.setContentPane(new Consulta()); 
