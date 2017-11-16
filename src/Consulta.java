@@ -1,15 +1,22 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.w3c.dom.events.EventTarget;
+import org.w3c.dom.views.AbstractView;
 
 @SuppressWarnings("serial")
 
@@ -116,6 +123,8 @@ public class Consulta extends JSplitPane {
 		table = new JTable(model);
 		table.getTableHeader().setBackground(new Color(252, 252, 252));
 		table.getTableHeader().setReorderingAllowed(false);
+		table.setRowSelectionAllowed(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		model.addColumn("Codigo tema");
 		model.addColumn("Palabra clave");
@@ -128,9 +137,26 @@ public class Consulta extends JSplitPane {
 		scrollPane.setBounds(180, 10, 537, 382);
 		scrollPane.setViewportBorder(null);
 		scrollPane.getViewport().setBackground(new Color(252, 252, 252));;
-
 		panel.add(scrollPane);
 		
+		table.addMouseListener(new MouseAdapter()  {
+			
+			public void mousePressed(MouseEvent mouseEvent) {
+		        //mouseEvent.getSource();
+		        Point point = mouseEvent.getPoint();
+		        String temaSeleccionado = table.getValueAt(table.rowAtPoint(point),0).toString();
+		        
+		        if (mouseEvent.getClickCount() == 2) {
+		        	
+		        	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(temaSeleccionado);
+				 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
+					frame.setContentPane(new Detalle(temaSelect)); 
+					frame.validate();
+		        }
+		    }
+		});
+
+				
 		lblFiltrar = new JLabel("Filtrar");
 		lblFiltrar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblFiltrar.setBounds(20, 18, 46, 14);
@@ -213,9 +239,9 @@ public class Consulta extends JSplitPane {
 			    
 				 if (table.getSelectedRow() != -1){
 					 	
-					 	setEditable(true);
+					 	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
-						frame.setContentPane(new Detalle()); 
+					 	frame.setContentPane(new Detalle(temaSelect)); 
 						frame.validate();
 						
 					} 
@@ -269,9 +295,9 @@ public class Consulta extends JSplitPane {
 			    
 				 if (table.getSelectedRow() != -1){
 					 	
-					 	setEditable(true);
+					 	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
-						frame.setContentPane(new Detalle()); 
+					 	frame.setContentPane(new Detalle(temaSelect)); 
 						frame.validate();
 						
 					} 
@@ -295,14 +321,6 @@ public class Consulta extends JSplitPane {
 			model.addRow(v);
 	
 		}
-	}
-
-	public static boolean isEditable() {
-		return isEditable;
-	}
-
-	public void setEditable(boolean isEditable) {
-		this.isEditable = isEditable;
 	}
 
 }
