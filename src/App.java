@@ -82,7 +82,7 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(new CrearSeguimiento());//Crear Seguimiento
+				setContentPane(new CrearSeguimiento());
 				validate();
 			}
 		});

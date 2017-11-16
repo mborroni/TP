@@ -7,7 +7,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.security.SecureRandom;
+import java.util.Random;
 
 @SuppressWarnings("serial")
 
@@ -20,9 +21,9 @@ public class Crear extends JPanel {
 	private JTextArea descripciontxtArea;
 	private JButton btnCancelar;
 	private JButton btnAceptar;
-	
+
 	private TemaDAO temaDAO = new TemaDAO();
-		
+
 	public Crear() {
 
 		setLayout(null);
@@ -62,9 +63,12 @@ public class Crear extends JPanel {
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblCodigo);
 
-
-		codigotxtFld = new JTextField("");
+		codigotxtFld = new JTextField();
+		codigotxtFld.setHorizontalAlignment(SwingConstants.CENTER);
 		codigotxtFld.setBounds(621, 25, 64, 20);
+		codigotxtFld.setText(codigoTema());
+		codigotxtFld.setEditable(false);
+		codigotxtFld.setBackground(null);
 
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(codigotxtFld);
@@ -110,8 +114,9 @@ public class Crear extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				frame.setContentPane(new Consulta()); 
+				frame.setContentPane(new Consulta());
 				frame.validate();
+
 			}
 		});
 		panel.add(btnCancelar);
@@ -122,16 +127,31 @@ public class Crear extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-			Tema tema = new Tema(codigotxtFld.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText());
-			temaDAO.agregarTema(tema);
 
-			JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-			frame.setContentPane(new Consulta()); 
-			frame.validate();
+				Tema tema = new Tema(codigotxtFld.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(),
+						fechaFin.getDate(), descripciontxtArea.getText());
+				temaDAO.agregarTema(tema);
+
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				frame.setContentPane(new Consulta());
+				frame.validate();
 			}
 		});
-		
+
 		panel.add(btnAceptar);
+	}
+
+	public String codigoTema() {
+		Random random = new SecureRandom();
+		char[] var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+		char[] result = new char[6];
+		
+			for (int i = 0; i < result.length; i++) {
+				// picks a random index out of character set > random character
+				int randomCharIndex = random.nextInt(var.length);
+				result[i] = var[randomCharIndex];
+			}
+			
+			return new String(result);
 	}
 }
