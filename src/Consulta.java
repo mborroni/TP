@@ -29,7 +29,8 @@ public class Consulta extends JSplitPane {
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnDetalle;
-	
+	private ArrayList<Tema> temas = new ArrayList<>();
+
 	//JTABLE
 	private static DefaultTableModel model;
 	private JTable table;
@@ -119,6 +120,7 @@ public class Consulta extends JSplitPane {
 		table = new JTable(model);
 		table.getTableHeader().setBackground(new Color(252, 252, 252));
 		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
@@ -145,9 +147,10 @@ public class Consulta extends JSplitPane {
 		        if (mouseEvent.getClickCount() == 2) {
 		        	
 		        	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(temaSeleccionado);
+		        	//Tema temaSelect = temas.get(temas.size() - 1);
 				 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
 					frame.setContentPane(new Detalle(temaSelect)); 
-					frame.validate();
+					frame.validate(); 
 		        }
 		    }
 		});
@@ -234,11 +237,11 @@ public class Consulta extends JSplitPane {
 			    public void actionPerformed(ActionEvent arg0) {
 			    
 				 if (table.getSelectedRow() != -1){
-					 	
+					 	/*
 					 	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
 					 	frame.setContentPane(new Detalle(temaSelect)); 
-						frame.validate();
+						frame.validate();*/
 						
 					} 
 				 else {
@@ -292,6 +295,7 @@ public class Consulta extends JSplitPane {
 				 if (table.getSelectedRow() != -1){
 					 	
 					 	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+					 // TODO Encontrar los detalles de seguimiento para este tema.
 					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
 					 	frame.setContentPane(new Detalle(temaSelect)); 
 						frame.validate();

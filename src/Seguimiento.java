@@ -5,7 +5,8 @@ public class Seguimiento {
 	private String codigo;
 	private String operador;
 	
-	public Seguimiento(String cod_tema, String operador) {
+	public Seguimiento(int cod_seguimiento, String cod_tema, String operador) {
+		this.cod_seguimiento = cod_seguimiento;
 		this.codigo = cod_tema;
 		this.operador = operador;
 	}

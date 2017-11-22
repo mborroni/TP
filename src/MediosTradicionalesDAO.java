@@ -59,10 +59,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
 		try{
 			ResultSet rs;
-			rs = stmt.executeQuery("SELECT S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
+			rs = stmt.executeQuery("SELECT S.cod_seguimiento, S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
 					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador");
 			while(rs.next()){
-				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				Seguimiento seguimiento = new MediosTradicionales(rs.getInt("cod_seguimiento"), rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 				seguimientos.add(seguimiento);
 			}
 		} catch(SQLException e){
@@ -83,7 +83,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			rs = stmt.executeQuery("Select * " 
 					+ "from seguimiento as S inner join operador as O on (S.id_operador = O.id_operador) where S.cod_tema = '"+ codigo +"'");
 			while (rs.next()) {
-				seguimientoMT = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				seguimientoMT = new MediosTradicionales(rs.getInt("cod_seguimiento"), rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 			
 			}
 		} catch(SQLException e){
@@ -102,7 +102,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			rs = stmt.executeQuery("Select * " 
 					+ "from seguimiento as S inner join operador as O on (S.id_operador = O.id_operador) where S.cod_tema = '"+ codigo +"'");
 			while (rs.next()) {
-				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				Seguimiento seguimiento = new MediosTradicionales(rs.getInt("cod_seguimiento"), rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 				seguimientos.add(seguimiento);
 			}
 		} catch(SQLException e){
@@ -117,10 +117,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
 		try{
 			ResultSet rs;
-			rs = stmt.executeQuery("SELECT S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
+			rs = stmt.executeQuery("SELECT S.cod_seguimiento, S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
 					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador) WHERE O.apellido LIKE '" + apellido + "'");
 			while(rs.next()){
-				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"),	rs.getString("apellido"),rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				Seguimiento seguimiento = new MediosTradicionales(rs.getInt("cod_seguimiento"), rs.getString("cod_tema"),	rs.getString("apellido"),rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 				
 				seguimientos.add(seguimiento);
 			}

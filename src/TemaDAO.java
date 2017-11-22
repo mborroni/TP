@@ -1,13 +1,14 @@
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+
 
 public class TemaDAO {
 
@@ -148,13 +149,16 @@ public class TemaDAO {
 		Tema tema = null;
 		try {
 			ResultSet rs;
-			rs = stmt.executeQuery("SELECT * FROM tema WHERE cod_tema like ' "
-							+ codigo + "%' ");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tema WHERE cod_tema like ?");
+			ps.setString(1, codigo + "%");
+			rs = ps.executeQuery();
+					//stmt.executeQuery("SELECT * FROM tema WHERE cod_tema like '"+ codigo + "%'");
 			while (rs.next()) {
 				tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
 						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		return tema;
