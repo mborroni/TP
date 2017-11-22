@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.44-bin.jar"/>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Milhu/Documents/TP/lib/TextPrompt.jar"/>
+	<classpathentry kind="lib" path="lib/TextPrompt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
