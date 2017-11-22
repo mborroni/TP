@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -20,7 +19,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -49,7 +47,6 @@ public class Detalle extends JSplitPane {
 	private JButton btnAplicar;
 	
 	//DAOS
-	private TemaDAO temaDAO = new TemaDAO();
 	private OperadorDAO operadorDAO = new OperadorDAO();
 	private SeguimientoDAO seguimientoDAO = new MediosTradicionalesDAO();
 	
