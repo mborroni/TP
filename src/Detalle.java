@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -20,7 +19,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -49,7 +47,6 @@ public class Detalle extends JSplitPane {
 	private JButton btnAplicar;
 	
 	//DAOS
-	private TemaDAO temaDAO = new TemaDAO();
 	private OperadorDAO operadorDAO = new OperadorDAO();
 	private SeguimientoDAO seguimientoDAO = new MediosTradicionalesDAO();
 	
@@ -74,7 +71,7 @@ public class Detalle extends JSplitPane {
 		lblCodigo.setBounds(276, 22, 83, 32);
 		barra.add(lblCodigo);
 
-		codigoTema = new JTextField("FUNCIONA");
+		codigoTema = new JTextField("321BCA");
 		codigoTema.setHorizontalAlignment(SwingConstants.LEFT);
 		codigoTema.setBounds(368, 22, 120, 32);
 		codigoTema.setFont(new Font("Calibri", Font.PLAIN, 30));
@@ -102,12 +99,14 @@ public class Detalle extends JSplitPane {
 
 		table = new JTable(model);
 		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
 		table.getTableHeader().setBackground(new Color(252, 252, 252));
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		
 		model.addColumn("Codigo seguimiento");
+		model.addColumn("Tipo");
 		model.addColumn("Operador");
 		
 		agregarSeguimientos(seguimientoDAO.obtenerSeguimientosPorCodigo(codigoTema.getText()));
@@ -246,7 +245,7 @@ public class Detalle extends JSplitPane {
 	public static void agregarSeguimientos(ArrayList<Seguimiento> seguimientos) {
 		model.setRowCount(0);
 		for (int i = 0; i < seguimientos.size(); i++) {
-			Object[] v = { seguimientos.get(i).getCod_seguimiento(), seguimientos.get(i).getOperador()
+			Object[] v = { seguimientos.get(i).getCod_seguimiento(), "" , seguimientos.get(i).getOperador()
 					 };
 			model.addRow(v);
 

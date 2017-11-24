@@ -120,8 +120,6 @@ public class App extends JFrame {
 			}
 		});
 
-		////////////////////////////////////////////////////////////////////
-
 		// Menu > Ayuda
 		JMenu mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
@@ -141,9 +139,5 @@ public class App extends JFrame {
 						"Acerca de", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-
-		
 	}
-
-
 }

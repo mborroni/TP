@@ -8,15 +8,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import org.w3c.dom.events.EventTarget;
-import org.w3c.dom.views.AbstractView;
 
 @SuppressWarnings("serial")
 
@@ -123,6 +119,7 @@ public class Consulta extends JSplitPane {
 		table = new JTable(model);
 		table.getTableHeader().setBackground(new Color(252, 252, 252));
 		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
