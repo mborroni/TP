@@ -13,23 +13,19 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 	
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
-	private Statement stmt = null;
 	
-	public MediosTradicionalesDAO() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-			stmt = (Statement) conn.createStatement();
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+	public MediosTradicionalesDAO() {}
 	
 	public void agregarSeguimiento(Seguimiento seguimiento) {
 
 		MediosTradicionales seguimientoMT = (MediosTradicionales) seguimiento; // cast variable
+		Statement stmt = null;
 		
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			int id_operador = 0;
 			String query = " insert into seguimiento (cod_tema, id_operador, mintv, mincentral, cant_notas, cant_tapas, apreciacion)"
 					+ " values (?, ?, ?, ?, ?, ?, ?)";
@@ -49,7 +45,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			preparedStmt.setString(7, seguimientoMT.getApreciacion());
 
 			preparedStmt.execute();
-		} catch (SQLException e) {
+			conn.close();
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
@@ -57,7 +56,13 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 	public ArrayList<Seguimiento> buscarSeguimientos(String texto) {
 		
 		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
+		Statement stmt = null;
+		
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT S.cod_seguimiento, S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
 					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador");
@@ -65,7 +70,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 				Seguimiento seguimiento = new MediosTradicionales(rs.getInt("cod_seguimiento"), rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 				seguimientos.add(seguimiento);
 			}
-		} catch(SQLException e){
+			conn.close();
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		
@@ -76,8 +84,13 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 		
 		Seguimiento seguimiento = null;
 		MediosTradicionales seguimientoMT = (MediosTradicionales) seguimiento;
+		Statement stmt = null;
 		
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 
 			rs = stmt.executeQuery("Select * " 
@@ -86,7 +99,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 				seguimientoMT = new MediosTradicionales(rs.getInt("cod_seguimiento"), rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 			
 			}
-		} catch(SQLException e){
+			conn.close();
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		
@@ -96,7 +112,13 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 	public ArrayList<Seguimiento> obtenerSeguimientosPorCodigo(String codigo){
 		
 		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
+		Statement stmt = null;
+		
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 
 			rs = stmt.executeQuery("Select * " 
@@ -105,7 +127,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 				Seguimiento seguimiento = new MediosTradicionales(rs.getInt("cod_seguimiento"), rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 				seguimientos.add(seguimiento);
 			}
-		} catch(SQLException e){
+			conn.close();
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		return seguimientos;
@@ -115,7 +140,13 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 	public ArrayList<Seguimiento> buscarSeguimientoPorOp(String apellido) {
 		
 		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
+		Statement stmt = null;
+		
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT S.cod_seguimiento, S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM seguimientos AS S"
 					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador) WHERE O.apellido LIKE '" + apellido + "'");
@@ -124,7 +155,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 				
 				seguimientos.add(seguimiento);
 			}
-		}catch(SQLException e){
+			conn.close();
+			
+		}catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		

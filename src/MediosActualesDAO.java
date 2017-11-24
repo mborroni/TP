@@ -1,4 +1,5 @@
 
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,24 +14,20 @@ public class MediosActualesDAO {
 
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
-	private Statement stmt = null;
 
-	public MediosActualesDAO() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-			stmt = (Statement) conn.createStatement();
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+	public MediosActualesDAO() {}
 
 	// Relevancia
 	// Calculos
 	
 	public void agregarSeguimiento(MediosActuales seguimiento) {
 	
+		Statement stmt = null;
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			int id_operador = 0;
 			String query = " insert into redes_sociales (cod_tema, id_operador, red_social, pub_apoyo, pub_rechazo, pub_neutral, replicas, mg)"
 					+ " values (?, ?, ?, ?, ?, ?, ?)";
@@ -51,8 +48,9 @@ public class MediosActualesDAO {
 			preparedStmt.setInt(9, seguimiento.getMg());
 	
 			preparedStmt.execute();
-			} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e);
+			} catch (SQLException | ClassNotFoundException e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e);
 			}
 		}
 }

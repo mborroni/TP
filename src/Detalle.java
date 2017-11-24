@@ -19,10 +19,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
-<<<<<<< HEAD
-import javax.swing.JToggleButton;
-=======
->>>>>>> 700ea5250a9d7290ab9a26de840cab155f80be39
+
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -74,11 +71,7 @@ public class Detalle extends JSplitPane {
 		lblCodigo.setBounds(276, 22, 83, 32);
 		barra.add(lblCodigo);
 
-<<<<<<< HEAD
-		codigoTema = new JTextField("321BCA");
-=======
 		codigoTema = new JTextField(temaSelect.getCodigo());
->>>>>>> 700ea5250a9d7290ab9a26de840cab155f80be39
 		codigoTema.setHorizontalAlignment(SwingConstants.LEFT);
 		codigoTema.setBounds(368, 22, 120, 32);
 		codigoTema.setFont(new Font("Calibri", Font.PLAIN, 30));
@@ -113,15 +106,11 @@ public class Detalle extends JSplitPane {
 		table.getTableHeader().setBackground(new Color(252, 252, 252));
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
-<<<<<<< HEAD
-		
+				
 		model.addColumn("Codigo seguimiento");
 		model.addColumn("Tipo");
 		model.addColumn("Operador");
 		
-=======
->>>>>>> 700ea5250a9d7290ab9a26de840cab155f80be39
 		agregarSeguimientos(seguimientoDAO.obtenerSeguimientosPorCodigo(codigoTema.getText()));
 		
 		JScrollPane scrollPane = new JScrollPane(table);

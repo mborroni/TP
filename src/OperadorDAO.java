@@ -30,9 +30,8 @@ public class OperadorDAO {
 			conn.close();
 
 		} catch (ClassNotFoundException | SQLException e) {
-
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
-
 		}
 		return listarOp;
 	}

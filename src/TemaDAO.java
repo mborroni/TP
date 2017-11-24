@@ -14,17 +14,9 @@ public class TemaDAO {
 
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
-	private Statement stmt = null;
 
-	public TemaDAO() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-			stmt = (Statement) conn.createStatement();
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+
+	public TemaDAO() {}
 	
 	/*
 	 *  AGREGAR TEMA
@@ -34,6 +26,9 @@ public class TemaDAO {
 
 		try {
 
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			
 			String query = " INSERT INTO tema (cod_tema, palabra_clave, descripcion, fecha_inicio, fecha_fin)"
 					+ " values (?, ?, ?, ?, ?)";
 
@@ -45,9 +40,9 @@ public class TemaDAO {
 			preparedStmt.setObject(5, tema.getFin());
 
 			preparedStmt.execute();
-
-			
-		} catch (SQLException e) {
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
@@ -58,9 +53,13 @@ public class TemaDAO {
 
 	public ArrayList<Tema> obtenerTemas() {
 
+		Statement stmt = null;
 		ArrayList<Tema> temas = new ArrayList<>();
 		try {
-
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin, descripcion FROM tema");
 			while (rs.next()) {
@@ -68,12 +67,10 @@ public class TemaDAO {
 						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
 				temas.add(tema);
 			}
-			
-
-		} catch (SQLException e) {
-
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
-
 		}
 		return temas;
 	}
@@ -84,15 +81,22 @@ public class TemaDAO {
 	
 	public ArrayList<String> listarTemasPorPalabraClave() {
 		
+		Statement stmt = null;
 		ArrayList<String> temas = new ArrayList<String>();
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT palabra_clave FROM tema");
 			while (rs.next()) {
 				String codigo = (rs.getString("palabra_clave"));
 				temas.add(codigo);
 			}
-		} catch (SQLException e) {
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		return temas;
@@ -104,15 +108,22 @@ public class TemaDAO {
 	
 	public ArrayList<String> listarTemasPorCodigo() {
 		
+		Statement stmt = null;
 		ArrayList<String> temas = new ArrayList<String>();
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT cod_tema FROM tema");
 			while (rs.next()) {
 				String codigo = (rs.getString("cod_tema"));
 				temas.add(codigo);
 			}
-		} catch (SQLException e) {
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		return temas;
@@ -124,8 +135,13 @@ public class TemaDAO {
 	
 	public ArrayList<Tema> buscarTema(String texto) {
 		
+		Statement stmt = null;
 		ArrayList<Tema> temas = new ArrayList<Tema>();
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+			
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT * FROM tema WHERE palabra_clave like'"
 							+ texto + "%'");
@@ -134,7 +150,9 @@ public class TemaDAO {
 						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
 				temas.add(tema);
 			}
-		} catch (SQLException e) {
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
 		return temas;
@@ -148,16 +166,19 @@ public class TemaDAO {
 		
 		Tema tema = null;
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			
 			ResultSet rs;
 			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tema WHERE cod_tema like ?");
 			ps.setString(1, codigo + "%");
 			rs = ps.executeQuery();
-					//stmt.executeQuery("SELECT * FROM tema WHERE cod_tema like '"+ codigo + "%'");
 			while (rs.next()) {
 				tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
 						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
 			}
-		} catch (SQLException e) {
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
 		}
@@ -172,11 +193,17 @@ public class TemaDAO {
 	public void eliminarTemaPorCodigo(String codigo){
 	
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			
 			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("DELETE FROM tema WHERE cod_tema = '" + codigo + "'");
 			preparedStmt.execute();
-		} catch (SQLException e) {
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e);
-		}	
+		}
+		
 	}
 
 

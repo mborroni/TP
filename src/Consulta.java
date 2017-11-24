@@ -29,7 +29,6 @@ public class Consulta extends JSplitPane {
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnDetalle;
-	private ArrayList<Tema> temas = new ArrayList<>();
 
 	//JTABLE
 	private static DefaultTableModel model;
