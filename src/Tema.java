@@ -7,6 +7,8 @@ public class Tema {
 	private Date inicio;
 	private Date fin;
 	private String descripcion;
+	//ArrayList<Seguimiento> seguimientos = new ArrayList<>();
+	// TODO Relacionar Tema con sus seguimientos
 
 	public Tema(String codigo, String palabraClave, Date inicio, Date fin, String descripcion) {
 		this.codigo = codigo;

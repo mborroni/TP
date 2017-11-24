@@ -19,7 +19,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
+<<<<<<< HEAD
 import javax.swing.JToggleButton;
+=======
+>>>>>>> 700ea5250a9d7290ab9a26de840cab155f80be39
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -50,7 +53,7 @@ public class Detalle extends JSplitPane {
 	private OperadorDAO operadorDAO = new OperadorDAO();
 	private SeguimientoDAO seguimientoDAO = new MediosTradicionalesDAO();
 	
-	public Detalle(Tema temaSelect) { // PASAR OBJETO TEMA¿
+	public Detalle(Tema temaSelect) { // ¿
 		
 		setLayout(null);
 		
@@ -71,7 +74,11 @@ public class Detalle extends JSplitPane {
 		lblCodigo.setBounds(276, 22, 83, 32);
 		barra.add(lblCodigo);
 
+<<<<<<< HEAD
 		codigoTema = new JTextField("321BCA");
+=======
+		codigoTema = new JTextField(temaSelect.getCodigo());
+>>>>>>> 700ea5250a9d7290ab9a26de840cab155f80be39
 		codigoTema.setHorizontalAlignment(SwingConstants.LEFT);
 		codigoTema.setBounds(368, 22, 120, 32);
 		codigoTema.setFont(new Font("Calibri", Font.PLAIN, 30));
@@ -96,7 +103,10 @@ public class Detalle extends JSplitPane {
 			}
 			
 		};
-
+		
+		model.addColumn("Codigo seguimiento");
+		model.addColumn("Operador");
+		
 		table = new JTable(model);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setResizingAllowed(false);
@@ -104,11 +114,14 @@ public class Detalle extends JSplitPane {
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
+<<<<<<< HEAD
 		
 		model.addColumn("Codigo seguimiento");
 		model.addColumn("Tipo");
 		model.addColumn("Operador");
 		
+=======
+>>>>>>> 700ea5250a9d7290ab9a26de840cab155f80be39
 		agregarSeguimientos(seguimientoDAO.obtenerSeguimientosPorCodigo(codigoTema.getText()));
 		
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -169,7 +182,7 @@ public class Detalle extends JSplitPane {
 		lblDescripcion.setBounds(29, 198, 109, 14);
 		panel.add(lblDescripcion);
 		
-		descripcionTxtArea = new JTextArea();
+		descripcionTxtArea = new JTextArea(temaSelect.getDescripcion());
 		JScrollPane scrollpane = new JScrollPane(descripcionTxtArea);
 		scrollpane.setBounds(29, 223, 316, 111);;
 		panel.add(scrollpane);
@@ -203,7 +216,9 @@ public class Detalle extends JSplitPane {
 		panel.add(btnAceptar);
 		
 		btnAplicar = new JButton("Aplicar");
-		
+		btnAplicar.setBounds(413, 372, 89, 23);
+		panel.add(btnAplicar);
+		lblSeguimiento.setFont(new Font("Calibri", Font.PLAIN, 18));
 		//EDITAR >> https://stackoverflow.com/questions/14153544/jtable-how-to-update-cell-using-custom-editor-by-pop-up-input-dialog-box/14176961
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -229,15 +244,6 @@ public class Detalle extends JSplitPane {
 				
 			}
 		});
-		btnAplicar.setBounds(413, 372, 89, 23);
-		panel.add(btnAplicar);
-		lblSeguimiento.setFont(new Font("Calibri", Font.PLAIN, 18));
-		
-		JToggleButton tglbtnEditar = new JToggleButton("Editar");
-		tglbtnEditar.setBounds(149, 345, 67, 23);
-		panel.add(tglbtnEditar);
-		
-
 		
 	}
 

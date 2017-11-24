@@ -7,9 +7,9 @@ public class MediosActuales extends Seguimiento {
 	private int replicas;
 	private int mg;
 	
-	public MediosActuales (String cod_tema, String operador, String redSocial, int publicacionesApoyo, int publicacionesRechazo,
+	public MediosActuales (int cod_seguimiento, String cod_tema, String operador, String redSocial, int publicacionesApoyo, int publicacionesRechazo,
 			int publicacionesNeutrales, int replicas, int mg) {
-		super (cod_tema, operador);
+		super (cod_seguimiento, cod_tema, operador);
 		this.redSocial = redSocial;
 		this.publicacionesApoyo = publicacionesApoyo;
 		this.publicacionesRechazo = publicacionesRechazo;
