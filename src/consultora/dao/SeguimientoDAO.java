@@ -1,6 +1,5 @@
 package consultora.dao;
 
-
 import java.util.ArrayList;
 
 import consultora.objects.Seguimiento;
