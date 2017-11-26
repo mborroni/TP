@@ -95,50 +95,7 @@ public class Detalle extends JSplitPane {
 		panel.setLayout(null);
 		panel.setBackground(new Color(246, 246, 246));
 		add(panel);
-		
-		model = new DefaultTableModel() {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-			
-		};
-		
-		model.addColumn("Codigo seguimiento");
-		model.addColumn("Operador");
-		
-		table = new JTable(model);
-		table.getTableHeader().setReorderingAllowed(false);
-		table.getTableHeader().setResizingAllowed(false);
-		table.getTableHeader().setBackground(new Color(252, 252, 252));
-		table.setRowSelectionAllowed(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				
-		model.addColumn("Codigo seguimiento");
-		model.addColumn("Tipo");
-		model.addColumn("Operador");
-		
-		agregarSeguimientos(seguimientoDAO.obtenerSeguimientosPorCodigo(codigoTema.getText()));
-		
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(371, 38, 340, 326);
-		scrollPane.setViewportBorder(null);
-		scrollPane.getViewport().setBackground(new Color(252, 252, 252));;
-		panel.add(scrollPane);
-		
-		buscarTxtField = new JTextField();
-		buscarTxtField.setBounds(371, 9, 197, 20);
-		panel.add(buscarTxtField);
-		buscarTxtField.setColumns(10);
-		
-		operadorCmbBox = new JComboBox<String>();
-		operadorCmbBox.setBounds(578, 9, 133, 20);
-		operadorCmbBox.addItem("Todos");
-		JComboBox<String> operadorcmbBox = new JComboBox<String>();
-		for (String operadores : operadorDAO.listarOperadores()) {
-			
-			operadorcmbBox.addItem(operadores);
-		}
+
 		
 		JLabel lblSeguimiento = new JLabel("Seguimiento");
 		lblSeguimiento.setBounds(29, 77, 109, 20);
@@ -243,15 +200,4 @@ public class Detalle extends JSplitPane {
 		
 	}
 
-
-	public static void agregarSeguimientos(ArrayList<Seguimiento> seguimientos) {
-		model.setRowCount(0);
-		for (int i = 0; i < seguimientos.size(); i++) {
-			Object[] v = { seguimientos.get(i).getCod_seguimiento(), "" , seguimientos.get(i).getOperador()
-					 };
-			model.addRow(v);
-
-		}
-		
-	}
 }
