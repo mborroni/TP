@@ -8,9 +8,9 @@ public class MediosTradicionales extends Seguimiento{
 	private int cantTapasRevistas;
 	private String apreciacion;
 	
-	public MediosTradicionales(int cod_seguimiento, String cod_tema, String operador, int minsTelevion, int minsHorarioCentral,
+	public MediosTradicionales(String cod_tema, String operador, int minsTelevion, int minsHorarioCentral,
 			int cantNotasDiarios, int cantTapasRevistas, String apreciacion) {
-		super(cod_seguimiento, cod_tema, operador);
+		super(cod_tema, operador);
 		this.minsTelevision = minsTelevion;
 		this.minsHorarioCentral = minsHorarioCentral;
 		this.cantNotasDiarios = cantNotasDiarios;
@@ -56,5 +56,21 @@ public class MediosTradicionales extends Seguimiento{
 
 	public void setCantTapasRevistas(int cantTapasRevistas) {
 		this.cantTapasRevistas = cantTapasRevistas;
+	}
+
+	public boolean esApoyado() {
+		return false;
+	}
+	
+	/* Para los medios tradicionales (televisión y diarios): se considera trascendente un tema si
+	 *  tuvo al menos una tapa diario, si fue tratado en horario central en algún programa 
+	 *  televisivo y si los minutos promedios por día superan los 60 minutos.
+	 */
+
+	public boolean esTrascendente() {
+		if (cantNotasDiarios > 1 &&  minsHorarioCentral > 1 &&  minsTelevision > 60)
+			return true;
+		else
+			return false;
 	}
 }

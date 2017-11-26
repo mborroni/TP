@@ -3,20 +3,25 @@ package consultora.objects;
 public class MediosActuales extends Seguimiento {
 	private String redSocial;
 	private int publicacionesApoyo;
+	private int mgPublicacionApoyo;
 	private int publicacionesRechazo;
+	private int mgPublicacionRechazo;
 	private int publicacionesNeutrales;
+	private int mgPublicacionNeutral;
+
 	private int replicas;
-	private int mg;
 	
-	public MediosActuales (int cod_seguimiento, String cod_tema, String operador, String redSocial, int publicacionesApoyo, int publicacionesRechazo,
-			int publicacionesNeutrales, int replicas, int mg) {
-		super (cod_seguimiento, cod_tema, operador);
+	public MediosActuales (String cod_tema, String operador, String redSocial, int publicacionesApoyo, int mgPublicacionApoyo, int publicacionesRechazo,
+			int mgPublicacionRechazo, int publicacionesNeutrales, int mgPublicacionNeutral, int replicas) {
+		super (cod_tema, operador);
 		this.redSocial = redSocial;
 		this.publicacionesApoyo = publicacionesApoyo;
+		this.mgPublicacionApoyo = mgPublicacionApoyo;
 		this.publicacionesRechazo = publicacionesRechazo;
+		this.mgPublicacionRechazo = mgPublicacionRechazo;
 		this.publicacionesNeutrales = publicacionesNeutrales;
+		this.mgPublicacionNeutral = mgPublicacionNeutral;
 		this.replicas = replicas;
-		this.mg = mg;		
 	}
 
 	public int getReplicas() {
@@ -42,6 +47,14 @@ public class MediosActuales extends Seguimiento {
 	public void setPublicacionesApoyo(int publicacionesApoyo) {
 		this.publicacionesApoyo = publicacionesApoyo;
 	}
+	
+	public int getMgPublicacionApoyo() {
+		return mgPublicacionApoyo;
+	}
+
+	public void setMgPublicacionApoyo(int mgPublicacionApoyo) {
+		this.mgPublicacionApoyo = mgPublicacionApoyo;
+	}
 
 	public int getPublicacionesRechazo() {
 		return publicacionesRechazo;
@@ -51,6 +64,14 @@ public class MediosActuales extends Seguimiento {
 		this.publicacionesRechazo = publicacionesRechazo;
 	}
 
+	public int getMgPublicacionRechazo() {
+		return mgPublicacionRechazo;
+	}
+
+	public void setMgPublicacionRechazo(int mgPublicacionRechazo) {
+		this.mgPublicacionRechazo = mgPublicacionRechazo;
+	}
+	
 	public int getPublicacionesNeutrales() {
 		return publicacionesNeutrales;
 	}
@@ -58,13 +79,44 @@ public class MediosActuales extends Seguimiento {
 	public void setPublicacionesNeutrales(int publicacionesNeutrales) {
 		this.publicacionesNeutrales = publicacionesNeutrales;
 	}
-
-	public int getMg() {
-		return mg;
+	
+	public int getMgPublicacionNeutral() {
+		return mgPublicacionNeutral;
 	}
 
-	public void setMg(int mg) {
-		this.mg = mg;
+	public void setMgPublicacionNeutral(int mgPublicacionNeutral) {
+		this.mgPublicacionNeutral = mgPublicacionNeutral;
 	}
 
+
+	/* El sistema calcula e informa si en la redes sociales el tratamiento del tema fue en apoyo o no. 
+	 * 	Se considera que fue en apoyo si las publicaciones en apoyo por los “me gusta” en apoyo superan 
+	 * en un 20 % las publicaciones en rechazo por los “me gusta” en rechazo.
+	 */
+
+	public boolean esApoyado(){
+		
+		if (((publicacionesApoyo*mgPublicacionApoyo) + ((publicacionesApoyo*mgPublicacionApoyo)*0.2)) > (publicacionesRechazo*mgPublicacionRechazo)){
+			return true;
+		}
+		else 
+			return false;
+		
+	}
+	
+	/*Para las redes sociales: si la cantidad de publicaciones son 
+	 * superiores a las 5000 y las réplicas 15000.
+	 */
+
+	public boolean esTrascendente() {
+		
+		int totalPublicaciones = publicacionesApoyo + publicacionesNeutrales + publicacionesRechazo;
+		
+		if (totalPublicaciones > 5000 && replicas > 15000){
+			return true;
+		}
+		else 
+			return false;
+	}
+	
 }
