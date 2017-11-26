@@ -16,8 +16,7 @@ nombre varchar (20),
 apellido varchar (20)
 );
 
-create table seguimiento (
-cod_seguimiento int not null auto_increment primary key,
+create table medios_tradicionales (
 cod_tema varchar (6),
 id_operador int ,
 mintv int,
@@ -29,15 +28,16 @@ foreign key (cod_tema) references tema(cod_tema),
 foreign key (id_operador) references operador(id_operador)
 );
 
-create table redes_sociales (
+create table medios_actuales (
 cod_tema varchar(6),
 red_social varchar (20) primary key,
 pub_apoyo int,
+mg_apoyo int,
 pub_rechazo int,
+mg_rechazo int,
 pub_neutral int,
+mg_neutral int,
 replicas int,
-mg int,
-foreign key (cod_seguimiento) references seguimiento(cod_seguimiento),
 foreign key (cod_tema) references tema(cod_tema)
 );
 

@@ -1,8 +1,5 @@
 package consultora.dao;
 
-
-
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +31,7 @@ public class MediosActualesDAO {
 			stmt = (Statement) conn.createStatement();
 			
 			int id_operador = 0;
-			String query = " insert into redes_sociales (cod_tema, id_operador, red_social, pub_apoyo, pub_rechazo, pub_neutral, replicas, mg)"
+			String query = " insert into medios_actuales (cod_tema, id_operador, red_social, pub_apoyo, mg_apoyo, pub_rechazo, mg_rechazo, pub_neutral, mg_neutral, replicas)"
 					+ " values (?, ?, ?, ?, ?, ?, ?)";
 	
 			ResultSet rs = stmt.executeQuery ("SELECT id_operador FROM operador WHERE apellido LIKE '" 
@@ -50,7 +47,7 @@ public class MediosActualesDAO {
 			preparedStmt.setInt(5, seguimiento.getPublicacionesRechazo());
 			preparedStmt.setInt(6, seguimiento.getPublicacionesNeutrales());
 			preparedStmt.setInt(8, seguimiento.getReplicas());
-			preparedStmt.setInt(9, seguimiento.getMg());
+			
 	
 			preparedStmt.execute();
 			} catch (SQLException | ClassNotFoundException e) {
