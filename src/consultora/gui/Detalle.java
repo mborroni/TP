@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 
 import com.toedter.calendar.JDateChooser;
 
+import consultora.dao.MediosActualesDAO;
+import consultora.objects.MediosActuales;
 import consultora.objects.Tema;
 
 @SuppressWarnings("serial")
@@ -37,6 +39,9 @@ public class Detalle extends JSplitPane {
 	private JButton btnCancelar;
 	private JButton btnAceptar;
 	private JButton btnAplicar;
+	private JTextField medioActual1;
+	
+	private MediosActuales medioActual = null;
 	
 	public Detalle(Tema temaSelect) { // ¿
 		
@@ -160,14 +165,9 @@ public class Detalle extends JSplitPane {
 		lblSeguimiento.setFont(new Font("Calibri", Font.PLAIN, 18));
 		
 		JLabel lblMediosActuales = new JLabel("Medios Actuales");
-		lblMediosActuales.setBounds(413, 13, 128, 16);
+		lblMediosActuales.setBounds(353, 0, 128, 16);
 		lblMediosActuales.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblMediosActuales);
-		
-		JTextArea MediosActualesArea = new JTextArea();
-		MediosActualesArea.setBounds(398, 37, 224, 105);   //ACA HAY Q COMPLETAR CON UN "temaSelect de medio actual"
-		MediosActualesArea.setEditable(false);
-		panel.add(MediosActualesArea);
 		
 		
 		
@@ -180,6 +180,16 @@ public class Detalle extends JSplitPane {
 		MediosTradiionalesArea.setBounds(398, 214, 224, 120);  //ACA HAY Q COMPLETAR CON UN "temaSelect de medio tradicional"
 		MediosTradiionalesArea.setEditable(false);
 		panel.add(MediosTradiionalesArea);
+		
+		// Medio Actual
+		
+		MediosActualesDAO maDAO = new MediosActualesDAO();
+		medioActual = (MediosActuales) maDAO.obtenerSeguimientoPorCodigo(temaSelect.getCodigo().toString());
+		
+		medioActual1 = new JTextField(medioActual.getRedSocial());
+		medioActual1.setBounds(365, 37, 116, 22);
+		panel.add(medioActual1);
+		medioActual1.setColumns(10);
 		
 		
 		

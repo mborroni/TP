@@ -65,7 +65,7 @@ public class MediosActualesDAO {
 			ResultSet rs;
 
 			rs = stmt.executeQuery("Select * " 
-					+ "from medios_actuales as S inner join operador as O on (S.id_operador = O.id_operador) where S.cod_tema = '"+ codigo +"'");
+					+ "from medios_actuales as S where S.cod_tema = '"+ codigo +"'");
 			while (rs.next()) {
 				seguimientoMA = new MediosActuales(rs.getString("cod_tema"), rs.getString("red_social"), rs.getInt("pub_apoyo"), rs.getInt("mg_apoyo"), rs.getInt("pub_rechazo"), rs.getInt("mg_rechazo"), rs.getInt("pub_neutral"), rs.getInt("mg_neutral"), rs.getInt("replicas"));
 			
