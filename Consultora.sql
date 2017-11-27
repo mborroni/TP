@@ -24,7 +24,7 @@ mincentral int,
 cant_notas int,
 cant_tapas int,
 apreciacion varchar (100),
-foreign key (cod_tema) references tema(cod_tema),
+foreign key (cod_tema) references tema(cod_tema) on delete cascade,
 foreign key (id_operador) references operador(id_operador)
 );
 
@@ -38,7 +38,7 @@ mg_rechazo int,
 pub_neutral int,
 mg_neutral int,
 replicas int,
-foreign key (cod_tema) references tema(cod_tema)
+foreign key (cod_tema) references tema(cod_tema) on delete cascade
 );
 
 select * from seguimiento;
