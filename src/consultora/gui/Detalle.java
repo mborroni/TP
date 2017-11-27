@@ -54,14 +54,16 @@ public class Detalle extends JSplitPane {
 	private JTextField medioTradicional4;
 	private JTextField medioTradicional5;
 	
-	private MediosActuales medioActual = null;
-	private MediosTradicionales medioTradicional = null; 
+	private MediosActuales medioActual;
+	private MediosTradicionales medioTradicional; 
 	private JLabel lblApreciacin;
 	private JLabel lblCantidadNotasDiarios;
 	private JLabel lblMinutosEnTelevision;
 	
 	public Detalle(Tema temaSelect) {
 		
+		medioTradicional = temaSelect.getSeguimientoMT();
+		medioActual = temaSelect.getSeguimientoMA();
 		setLayout(null);
 		
 		/*
@@ -198,9 +200,6 @@ public class Detalle extends JSplitPane {
 		lblCod.setBounds(437, 41, 75, 16);
 		panel.add(lblCod);
 		
-		MediosActualesDAO maDAO = new MediosActualesDAO();
-		medioActual = (MediosActuales) maDAO.obtenerSeguimientoPorCodigo(temaSelect.getCodigo().toString());
-		
 		medioActual1 = new JTextField();//medioActual.getRedSocial());
 		medioActual1.setBounds(517, 37, 116, 22);
 		panel.add(medioActual1);
@@ -256,11 +255,9 @@ public class Detalle extends JSplitPane {
 		medioActual7.setColumns(10);
 		
 
-		MediosTradicionalesDAO mtDAO = new MediosTradicionalesDAO();
-		medioTradicional = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(temaSelect.getCodigo().toString());
+
 		
-		
-		medioTradicional1= new JTextArea();//medioTradicional.getApreciacion());
+		medioTradicional1= new JTextArea(medioTradicional.getApreciacion());
 		JScrollPane scrollPane = new JScrollPane(medioTradicional1);
 		scrollPane.setBounds(475, 195, 198, 71);
 		panel.add(scrollPane);
@@ -270,18 +267,18 @@ public class Detalle extends JSplitPane {
 		lblApreciacin.setBounds(386, 198, 80, 16);
 		panel.add(lblApreciacin);
 		
-		lblCantidadNotasDiarios = new JLabel();//"Cantidad Notas Diarios/Tapas de Revista");
+		lblCantidadNotasDiarios = new JLabel("Cantidad Notas Diarios/Tapas de Revista");
 		lblCantidadNotasDiarios.setFont(new Font("Calibri", Font.PLAIN, 16));
 		lblCantidadNotasDiarios.setBounds(396, 268, 277, 16);
 		panel.add(lblCantidadNotasDiarios);
 		
-		medioTradicional2 = new JTextField();//medioTradicional.getCantNotasDiarios());
+		medioTradicional2 = new JTextField(medioTradicional.getCantNotasDiarios());
 		medioTradicional2.setEditable(false);
 		medioTradicional2.setBounds(485,285, 36, 22);
 		panel.add(medioTradicional2);
 		medioTradicional2.setColumns(10);
 		
-		medioTradicional3 = new JTextField();//medioTradicional.getCantNotasDiarios());
+		medioTradicional3 = new JTextField(medioTradicional.getCantNotasDiarios());
 		medioTradicional3.setEditable(false);
 		medioTradicional3.setBounds(570,285, 36, 22);
 		panel.add(medioTradicional3);
@@ -292,13 +289,13 @@ public class Detalle extends JSplitPane {
 		lblMinutosEnTelevision.setBounds(390, 308, 287, 16);
 		panel.add(lblMinutosEnTelevision);
 		
-		medioTradicional4 = new JTextField();//medioTradicional.getMinsHorarioCentral());
+		medioTradicional4 = new JTextField(medioTradicional.getMinsHorarioCentral());
 		medioTradicional4.setEditable(false);
 		medioTradicional4.setBounds(485,327, 36, 22);
 		panel.add(medioTradicional4);
 		medioTradicional4.setColumns(10);
 		
-		medioTradicional5 = new JTextField();//medioTradicional.getMinsTelevision());
+		medioTradicional5 = new JTextField(medioTradicional.getMinsTelevision());
 		medioTradicional5.setEditable(false);
 		medioTradicional5.setBounds(570,327, 36, 22);
 		panel.add(medioTradicional5);

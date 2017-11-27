@@ -8,15 +8,16 @@ public class Tema {
 	private Date inicio;
 	private Date fin;
 	private String descripcion;
-	//ArrayList<Seguimiento> seguimientos = new ArrayList<>();
-	// TODO Relacionar Tema con sus seguimientos
+	private MediosTradicionales seguimientoMT;
+	private MediosActuales seguimientoMA;
 
-	public Tema(String codigo, String palabraClave, Date inicio, Date fin, String descripcion) {
+	public Tema(String codigo, String palabraClave, Date inicio, Date fin, String descripcion, MediosTradicionales seguimientoMT) {
 		this.codigo = codigo;
 		this.palabraClave = palabraClave;
 		this.setInicio(inicio);
 		this.setFin(fin);
 		this.descripcion = descripcion;
+		this.seguimientoMT = seguimientoMT;
 	}
 
 	public String getCodigo() {
@@ -34,7 +35,7 @@ public class Tema {
 	public void setPalabraClave(String palabraClave) {
 		this.palabraClave = palabraClave;
 	}
-
+ 
 	public Date getInicio() {
 		return inicio;
 	}
@@ -64,6 +65,22 @@ public class Tema {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public MediosActuales getSeguimientoMA() {
+		return seguimientoMA;
+	}
+
+	public void setSeguimientoMA(MediosActuales seguimientoMA) {
+		this.seguimientoMA = seguimientoMA;
+	}
+
+	public MediosTradicionales getSeguimientoMT() {
+		return seguimientoMT;
+	}
+
+	public void setSeguimientoMT(MediosTradicionales seguimientoMT) {
+		this.seguimientoMT = seguimientoMT;
 	}
 
 }

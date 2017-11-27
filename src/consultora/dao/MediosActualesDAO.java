@@ -4,21 +4,19 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 import consultora.objects.MediosActuales;
 import consultora.objects.Seguimiento;
+import consultora.objects.Tema;
 
 
 public class MediosActualesDAO {
 
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
-
 
 	// Relevancia
 	// Calculos
@@ -47,11 +45,10 @@ public class MediosActualesDAO {
 			preparedStmt.execute();
 			} catch (SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
-				JOptionPane.showMessageDialog(null, e);
 			}
 		}
 	
-	public Seguimiento obtenerSeguimientoPorCodigo(String codigo) {
+	public Seguimiento obtenerSeguimientoPorCodigo(Tema t) {
 		
 		Seguimiento seguimiento = null;
 		MediosActuales seguimientoMA = (MediosActuales) seguimiento;
@@ -65,7 +62,7 @@ public class MediosActualesDAO {
 			ResultSet rs;
 
 			rs = stmt.executeQuery("Select * " 
-					+ "from medios_actuales as S where S.cod_tema = '"+ codigo +"'");
+					+ "from medios_actuales as S where S.cod_tema = '"+ t.getCodigo()+"'");
 			while (rs.next()) {
 				seguimientoMA = new MediosActuales(rs.getString("cod_tema"), rs.getString("red_social"), rs.getInt("pub_apoyo"), rs.getInt("mg_apoyo"), rs.getInt("pub_rechazo"), rs.getInt("mg_rechazo"), rs.getInt("pub_neutral"), rs.getInt("mg_neutral"), rs.getInt("replicas"));
 			
@@ -74,9 +71,8 @@ public class MediosActualesDAO {
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
 		}
-		
+		t.setSeguimientoMA(seguimientoMA);
 		return seguimientoMA;
 	}
 }

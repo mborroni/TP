@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
@@ -55,7 +53,6 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
 		}
 	}
 	
@@ -80,9 +77,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
 		}
-		
 		return seguimientos;
 	}
 	
@@ -106,12 +101,10 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			
 			}
 			conn.close();
-			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
 		}
-		
+		//t.setSeguimientoMT(seguimientoMT);
 		return seguimientoMT;
 	}
 	
@@ -137,8 +130,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
-		}
+			}
 		return seguimientos;
 	
 	}

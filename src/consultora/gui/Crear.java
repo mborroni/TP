@@ -141,7 +141,7 @@ public class Crear extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				Tema tema = new Tema(codigotxtFld.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(),
-						fechaFin.getDate(), descripciontxtArea.getText());
+						fechaFin.getDate(), descripciontxtArea.getText(), null); // null
 				temaDAO.agregarTema(tema);
 
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());

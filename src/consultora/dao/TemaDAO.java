@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import consultora.objects.Tema;
+import consultora.objects.*;
 
 
 
@@ -18,7 +18,8 @@ public class TemaDAO {
 
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
-
+	
+	private MediosTradicionalesDAO mtDAO = new MediosTradicionalesDAO();
 
 	public TemaDAO() {}
 	
@@ -67,8 +68,10 @@ public class TemaDAO {
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin, descripcion FROM tema");
 			while (rs.next()) {
+				
+				MediosTradicionales sMT = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(rs.getString("cod_tema"));
 				Tema tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
-						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
+						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"), sMT);
 				temas.add(tema);
 			}
 			conn.close();
@@ -139,6 +142,7 @@ public class TemaDAO {
 	
 	public ArrayList<Tema> buscarTema(String texto) {
 		
+		MediosTradicionales mt = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(texto);
 		Statement stmt = null;
 		ArrayList<Tema> temas = new ArrayList<Tema>();
 		try {
@@ -151,13 +155,12 @@ public class TemaDAO {
 							+ texto + "%'");
 			while (rs.next()) {
 				Tema tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
-						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
+						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"), mt);
 				temas.add(tema);
 			}
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
 		}
 		return temas;
 	}
@@ -168,6 +171,8 @@ public class TemaDAO {
 	
 	public Tema obtenerTemaPorCodigo(String codigo) {
 		
+		
+		MediosTradicionales mt = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(codigo);
 		Tema tema = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -179,7 +184,7 @@ public class TemaDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
-						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
+						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"), mt);
 			}
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -214,19 +219,6 @@ public class TemaDAO {
 	/*
 	 * UPDATE TEMA
 	 */
-
-	
-	
-	
-	
-	
-
-	/*
-	  					dao.eliminarTemaPorID(
-							dao.obtenerTemaPorID(table.getValueAt(table.getSelectedRow(), 0).toString()).getID());
-					cargarTabla(dao.obtenerTemas());
-	 */
-	
 
 
 }

@@ -78,7 +78,7 @@ public class MediosTradicionales extends Seguimiento{
 	 */
 
 	public boolean esTrascendente() {
-		if (cantNotasDiarios > 1 &&  minsHorarioCentral > 1 &&  minsTelevision > 60)
+		if (cantNotasDiarios >= 1 &&  minsHorarioCentral >= 1 &&  minsTelevision > 60)
 			return true;
 		else
 			return false;

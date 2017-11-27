@@ -312,7 +312,6 @@ public class Consulta extends JSplitPane {
 				 if (table.getSelectedRow() != -1){
 					 	
 					 	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
-					 // TODO Encontrar los detalles de seguimiento para este tema.
 					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
 					 	frame.setContentPane(new Detalle(temaSelect)); 
 						frame.validate();

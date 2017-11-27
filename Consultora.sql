@@ -41,7 +41,6 @@ replicas int,
 foreign key (cod_tema) references tema(cod_tema) on delete cascade
 );
 
-select * from seguimiento;
 insert into operador (nombre, apellido) values ("Ramiro","Capria");
 insert into operador (nombre, apellido) values ("Gabriel","Gimenez");
 insert into operador (nombre, apellido) values ("Francisco","Piccina");
