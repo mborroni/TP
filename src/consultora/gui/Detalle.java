@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 
 import com.toedter.calendar.JDateChooser;
 
+import consultora.objects.MediosActuales;
 import consultora.objects.Tema;
 
 @SuppressWarnings("serial")
@@ -88,18 +89,21 @@ public class Detalle extends JSplitPane {
 		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblPalabraClave);
 		
-		palabraClave = new JTextField();
+		palabraClave = new JTextField(temaSelect.getPalabraClave());
 		palabraClave.setBounds(136, 38, 151, 21);
 		palabraClave.setFont(new Font("Calibri", Font.PLAIN, 17));
+		palabraClave.setEditable(false);
 		panel.add(palabraClave);
 
 		JLabel lblDesde = new JLabel("Desde");
 		lblDesde.setBounds(58, 116, 45, 20);
 		panel.add(lblDesde);
+		
 		lblDesde.setFont(new Font("Calibri", Font.PLAIN, 16));
 		
-		fechaInicio = new JDateChooser();
+		fechaInicio = new JDateChooser(temaSelect.getInicio());
 		fechaInicio.setBounds(136, 116, 151, 20);
+		fechaInicio.setEnabled(false);
 		panel.add(fechaInicio);
 
 		JLabel lblHasta = new JLabel("Hasta");
@@ -107,8 +111,9 @@ public class Detalle extends JSplitPane {
 		panel.add(lblHasta);
 		lblHasta.setFont(new Font("Calibri", Font.PLAIN, 16));
 		
-		fechaFin = new JDateChooser();
+		fechaFin = new JDateChooser(temaSelect.getFin());
 		fechaFin.setBounds(136, 159, 151, 20);
+		fechaFin.setEnabled(false);
 		panel.add(fechaFin);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
@@ -119,6 +124,7 @@ public class Detalle extends JSplitPane {
 		descripcionTxtArea = new JTextArea(temaSelect.getDescripcion());
 		JScrollPane scrollpane = new JScrollPane(descripcionTxtArea);
 		scrollpane.setBounds(29, 223, 316, 111);;
+		descripcionTxtArea.setEditable(false);
 		panel.add(scrollpane);
 		
 		btnCancelar = new JButton("Cancelar");
@@ -153,6 +159,33 @@ public class Detalle extends JSplitPane {
 		btnAplicar.setBounds(413, 372, 89, 23);
 		panel.add(btnAplicar);
 		lblSeguimiento.setFont(new Font("Calibri", Font.PLAIN, 18));
+		
+		JLabel lblMediosActuales = new JLabel("Medios Actuales");
+		lblMediosActuales.setBounds(413, 13, 128, 16);
+		lblMediosActuales.setFont(new Font("Calibri", Font.PLAIN, 18));
+		panel.add(lblMediosActuales);
+		
+		JTextArea MediosActualesArea = new JTextArea();
+		MediosActualesArea.setBounds(398, 37, 224, 105);   //ACA HAY Q COMPLETAR CON UN "temaSelect de medio actual"
+		MediosActualesArea.setEditable(false);
+		panel.add(MediosActualesArea);
+		
+		
+		
+		JLabel lblMediosTradicionales = new JLabel("Medios Tradicionales");
+		lblMediosTradicionales.setFont(new Font("Calibri", Font.PLAIN, 18));
+		lblMediosTradicionales.setBounds(413, 185, 178, 16);
+		panel.add(lblMediosTradicionales);
+		
+		JTextArea MediosTradiionalesArea = new JTextArea();
+		MediosTradiionalesArea.setBounds(398, 214, 224, 120);  //ACA HAY Q COMPLETAR CON UN "temaSelect de medio tradicional"
+		MediosTradiionalesArea.setEditable(false);
+		panel.add(MediosTradiionalesArea);
+		
+		
+		
+		
+		
 		//EDITAR >> https://stackoverflow.com/questions/14153544/jtable-how-to-update-cell-using-custom-editor-by-pop-up-input-dialog-box/14176961
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -180,5 +213,4 @@ public class Detalle extends JSplitPane {
 		});
 		
 	}
-
 }
