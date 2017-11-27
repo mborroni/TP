@@ -21,7 +21,6 @@ import javax.swing.SwingUtilities;
 
 import com.toedter.calendar.JDateChooser;
 
-import consultora.objects.MediosActuales;
 import consultora.objects.Tema;
 
 @SuppressWarnings("serial")
