@@ -56,8 +56,9 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 	
 	public Seguimiento obtenerSeguimientoPorCodigo(String codigo) {
 		
-		Seguimiento seguimiento = null;
-		MediosTradicionales seguimientoMT = (MediosTradicionales) seguimiento;
+		Seguimiento seguimiento = new MediosTradicionales(null, null, 0, 0, 0, 0, null);
+		//MediosTradicionales seguimientoMT = (MediosTradicionales) seguimiento;
+
 		Statement stmt = null;
 		
 		try{
@@ -70,14 +71,14 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			rs = stmt.executeQuery("Select * " 
 					+ "from medios_tradicionales as S inner join operador as O on (S.id_operador = O.id_operador) where S.cod_tema = '"+ codigo +"'");
 			while (rs.next()) {
-				seguimientoMT = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
+				seguimiento = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
 			
 			}
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return seguimientoMT;
+		return seguimiento;
 	}
 	
 }

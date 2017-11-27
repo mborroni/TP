@@ -64,6 +64,7 @@ public class Detalle extends JSplitPane {
 		medioActual = temaSelect.getSeguimientoMA();
 
 		// TODO if null > seguimiento (vacio)
+		
 
 		setLayout(null);
 
