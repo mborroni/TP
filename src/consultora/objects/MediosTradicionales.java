@@ -2,6 +2,7 @@ package consultora.objects;
 
 public class MediosTradicionales extends Seguimiento{
 	
+	private String operador;
 	private int minsTelevision;
 	private int minsHorarioCentral;
 	private int cantNotasDiarios;
@@ -10,12 +11,21 @@ public class MediosTradicionales extends Seguimiento{
 	
 	public MediosTradicionales(String cod_tema, String operador, int minsTelevion, int minsHorarioCentral,
 			int cantNotasDiarios, int cantTapasRevistas, String apreciacion) {
-		super(cod_tema, operador);
+		super(cod_tema);
+		this.operador = operador;
 		this.minsTelevision = minsTelevion;
 		this.minsHorarioCentral = minsHorarioCentral;
 		this.cantNotasDiarios = cantNotasDiarios;
 		this.cantTapasRevistas = cantTapasRevistas;
 		this.apreciacion = apreciacion;
+	}
+
+	public String getOperador() {
+		return operador;
+	}
+
+	public void setOperador(String operador) {
+		this.operador = operador;
 	}
 
 	public String getApreciacion() {

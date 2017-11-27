@@ -3,11 +3,9 @@ package consultora.objects;
 public abstract class Seguimiento {
 
 	private String codigo;
-	private String operador;
 	
-	public Seguimiento(String cod_tema, String operador) {
+	public Seguimiento(String cod_tema) {
 		this.codigo = cod_tema;
-		this.operador = operador;
 	}
 
 
@@ -17,14 +15,6 @@ public abstract class Seguimiento {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
-	}
-
-	public String getOperador() {
-		return operador;
-	}
-
-	public void setOperador(String operador) {
-		this.operador = operador;
 	}
 
 	public abstract boolean esApoyado();

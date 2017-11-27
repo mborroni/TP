@@ -11,9 +11,9 @@ public class MediosActuales extends Seguimiento {
 
 	private int replicas;
 	
-	public MediosActuales (String cod_tema, String operador, String redSocial, int publicacionesApoyo, int mgPublicacionApoyo, int publicacionesRechazo,
+	public MediosActuales (String cod_tema, String redSocial, int publicacionesApoyo, int mgPublicacionApoyo, int publicacionesRechazo,
 			int mgPublicacionRechazo, int publicacionesNeutrales, int mgPublicacionNeutral, int replicas) {
-		super (cod_tema, operador);
+		super (cod_tema);
 		this.redSocial = redSocial;
 		this.publicacionesApoyo = publicacionesApoyo;
 		this.mgPublicacionApoyo = mgPublicacionApoyo;
