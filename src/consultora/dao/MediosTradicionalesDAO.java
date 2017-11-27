@@ -59,7 +59,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 		}
 	}
 	
-	public ArrayList<Seguimiento> buscarSeguimientos(String texto) {
+	public ArrayList<Seguimiento> buscarSeguimiento(String texto) {
 		
 		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
 		Statement stmt = null;
@@ -70,7 +70,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 			stmt = (Statement) conn.createStatement();
 			
 			ResultSet rs;
-			rs = stmt.executeQuery("SELECT S.cod_seguimiento, S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM medios_tradicionales AS S"
+			rs = stmt.executeQuery("SELECT S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM medios_tradicionales AS S"
 					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador");
 			while(rs.next()){
 				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
@@ -143,32 +143,4 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 	
 	}
 	
-	public ArrayList<Seguimiento> buscarSeguimientoPorOp(String apellido) {
-		
-		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
-		Statement stmt = null;
-		
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-			stmt = (Statement) conn.createStatement();
-			
-			ResultSet rs;
-			rs = stmt.executeQuery("SELECT S.cod_seguimiento, S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM medios_tradicionales AS S"
-					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador) WHERE O.apellido LIKE '" + apellido + "'");
-			while(rs.next()){
-				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"),	rs.getString("apellido"),rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
-				
-				seguimientos.add(seguimiento);
-			}
-			conn.close();
-			
-		}catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
-		}
-		
-		return seguimientos;
-	}
-
 }
