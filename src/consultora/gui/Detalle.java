@@ -22,7 +22,9 @@ import javax.swing.SwingUtilities;
 import com.toedter.calendar.JDateChooser;
 
 import consultora.dao.MediosActualesDAO;
+import consultora.dao.MediosTradicionalesDAO;
 import consultora.objects.MediosActuales;
+import consultora.objects.MediosTradicionales;
 import consultora.objects.Tema;
 
 @SuppressWarnings("serial")
@@ -40,10 +42,25 @@ public class Detalle extends JSplitPane {
 	private JButton btnAceptar;
 	private JButton btnAplicar;
 	private JTextField medioActual1;
+	private JTextField medioActual2;
+	private JTextField medioActual3;
+	private JTextField medioActual4;
+	private JTextField medioActual5;
+	private JTextField medioActual6;
+	private JTextField medioActual7;
+	private JTextArea medioTradicional1;	
+	private JTextField medioTradicional2;
+	private JTextField medioTradicional3;
+	private JTextField medioTradicional4;
+	private JTextField medioTradicional5;
 	
 	private MediosActuales medioActual = null;
+	private MediosTradicionales medioTradicional = null; 
+	private JLabel lblApreciacin;
+	private JLabel lblCantidadNotasDiarios;
+	private JLabel lblMinutosEnTelevision;
 	
-	public Detalle(Tema temaSelect) { // ¿
+	public Detalle(Tema temaSelect) {
 		
 		setLayout(null);
 		
@@ -77,7 +94,7 @@ public class Detalle extends JSplitPane {
 		*/
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 85, 750, 415);
+		panel.setBounds(0, 84, 750, 415);
 		panel.setLayout(null);
 		panel.setBackground(new Color(246, 246, 246));
 		add(panel);
@@ -165,7 +182,7 @@ public class Detalle extends JSplitPane {
 		lblSeguimiento.setFont(new Font("Calibri", Font.PLAIN, 18));
 		
 		JLabel lblMediosActuales = new JLabel("Medios Actuales");
-		lblMediosActuales.setBounds(353, 0, 128, 16);
+		lblMediosActuales.setBounds(471, 12, 128, 16);
 		lblMediosActuales.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblMediosActuales);
 		
@@ -173,27 +190,125 @@ public class Detalle extends JSplitPane {
 		
 		JLabel lblMediosTradicionales = new JLabel("Medios Tradicionales");
 		lblMediosTradicionales.setFont(new Font("Calibri", Font.PLAIN, 18));
-		lblMediosTradicionales.setBounds(413, 185, 178, 16);
+		lblMediosTradicionales.setBounds(455, 175, 178, 16);
 		panel.add(lblMediosTradicionales);
 		
-		JTextArea MediosTradiionalesArea = new JTextArea();
-		MediosTradiionalesArea.setBounds(398, 214, 224, 120);  //ACA HAY Q COMPLETAR CON UN "temaSelect de medio tradicional"
-		MediosTradiionalesArea.setEditable(false);
-		panel.add(MediosTradiionalesArea);
-		
 		// Medio Actual
+		
+		JLabel lblCod = new JLabel("Red Social");
+		lblCod.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblCod.setBounds(437, 41, 75, 16);
+		panel.add(lblCod);
 		
 		MediosActualesDAO maDAO = new MediosActualesDAO();
 		medioActual = (MediosActuales) maDAO.obtenerSeguimientoPorCodigo(temaSelect.getCodigo().toString());
 		
 		medioActual1 = new JTextField(medioActual.getRedSocial());
-		medioActual1.setBounds(365, 37, 116, 22);
+		medioActual1.setBounds(517, 37, 116, 22);
 		panel.add(medioActual1);
+		medioActual1.setEditable(false);
 		medioActual1.setColumns(10);
 		
 		
+		JLabel lblMgApoyo = new JLabel("Mg Apoyo/Neutral/Rechazo");
+		lblMgApoyo.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblMgApoyo.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMgApoyo.setBounds(445, 66, 216, 16);
+		panel.add(lblMgApoyo);
+		
+		medioActual2 = new JTextField(medioActual.getMgPublicacionApoyo());
+		medioActual2.setEditable(false);
+		medioActual2.setBounds(471, 95, 36, 22);
+		panel.add(medioActual2);
+		medioActual2.setColumns(10);
+		
+		medioActual3 = new JTextField(medioActual.getMgPublicacionNeutral());
+		medioActual3.setEditable(false);
+		medioActual3.setBounds(522, 95, 36, 22);
+		panel.add(medioActual3);
+		medioActual3.setColumns(10);
+		
+		medioActual4 = new JTextField(medioActual.getMgPublicacionRechazo());
+		medioActual4.setEditable(false);
+		medioActual4.setBounds(570, 95, 36, 22);
+		panel.add(medioActual4);
+		medioActual4.setColumns(10);
+				
+		JLabel lblPostApoyoneutralrechazo = new JLabel("Post Apoyo/Neutral/Rechazo");
+		lblPostApoyoneutralrechazo.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblPostApoyoneutralrechazo.setBounds(437, 125, 216, 16);
+		panel.add(lblPostApoyoneutralrechazo);
+		
+		medioActual5 = new JTextField(medioActual.getPublicacionesApoyo());
+		medioActual5.setEditable(false);
+		medioActual5.setBounds(471, 144, 36, 22);
+		panel.add(medioActual5);
+		medioActual5.setColumns(10);
+		
+		medioActual6 = new JTextField(medioActual.getPublicacionesNeutrales());
+		medioActual6.setEditable(false);
+		medioActual6.setBounds(522, 144, 36, 22);
+		panel.add(medioActual6);
+		medioActual6.setColumns(10);
+		
+		medioActual7 = new JTextField(medioActual.getPublicacionesRechazo());
+		medioActual7.setEditable(false);
+		medioActual7.setBounds(570, 144, 36, 22);
+		panel.add(medioActual7);
+		medioActual7.setColumns(10);
+		
+
+		MediosTradicionalesDAO mtDAO = new MediosTradicionalesDAO();
+		medioTradicional = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(temaSelect.getCodigo().toString());
 		
 		
+		medioTradicional1= new JTextArea(medioTradicional.getApreciacion());
+		JScrollPane scrollPane = new JScrollPane(medioTradicional1);
+		scrollPane.setBounds(475, 195, 198, 71);
+		panel.add(scrollPane);
+		
+		lblApreciacin = new JLabel("Apreciaci\u00F3n:");
+		lblApreciacin.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblApreciacin.setBounds(386, 198, 80, 16);
+		panel.add(lblApreciacin);
+		
+		lblCantidadNotasDiarios = new JLabel("Cantidad Notas Diarios/Tapas de Revista");
+		lblCantidadNotasDiarios.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblCantidadNotasDiarios.setBounds(396, 268, 277, 16);
+		panel.add(lblCantidadNotasDiarios);
+		
+		medioTradicional2 = new JTextField(medioTradicional.getCantNotasDiarios());
+		medioTradicional2.setEditable(false);
+		medioTradicional2.setBounds(485,285, 36, 22);
+		panel.add(medioTradicional2);
+		medioTradicional2.setColumns(10);
+		
+		medioTradicional3 = new JTextField(medioTradicional.getCantNotasDiarios());
+		medioTradicional3.setEditable(false);
+		medioTradicional3.setBounds(570,285, 36, 22);
+		panel.add(medioTradicional3);
+		medioTradicional3.setColumns(10);
+		
+		lblMinutosEnTelevision = new JLabel("Minutos Horario Central/Television");
+		lblMinutosEnTelevision.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblMinutosEnTelevision.setBounds(390, 308, 287, 16);
+		panel.add(lblMinutosEnTelevision);
+		
+		medioTradicional4 = new JTextField(medioTradicional.getMinsHorarioCentral());
+		medioTradicional4.setEditable(false);
+		medioTradicional4.setBounds(485,327, 36, 22);
+		panel.add(medioTradicional4);
+		medioTradicional4.setColumns(10);
+		
+		medioTradicional5 = new JTextField(medioTradicional.getMinsTelevision());
+		medioTradicional5.setEditable(false);
+		medioTradicional5.setBounds(570,327, 36, 22);
+		panel.add(medioTradicional5);
+		medioTradicional5.setColumns(10);
+		
+		
+		
+
 		
 		//EDITAR >> https://stackoverflow.com/questions/14153544/jtable-how-to-update-cell-using-custom-editor-by-pop-up-input-dialog-box/14176961
 		btnAplicar.addActionListener(new ActionListener() {
