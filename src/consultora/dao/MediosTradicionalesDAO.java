@@ -1,10 +1,8 @@
 package consultora.dao;
 
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -56,31 +54,6 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 		}
 	}
 	
-	public ArrayList<Seguimiento> buscarSeguimiento(String texto) {
-		
-		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
-		Statement stmt = null;
-		
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-			stmt = (Statement) conn.createStatement();
-			
-			ResultSet rs;
-			rs = stmt.executeQuery("SELECT S.cod_tema, O.apellido, S.mintv, S.mincentral, S.cant_notas, S.cant_tapas, S.apreciacion FROM medios_tradicionales AS S"
-					+ "INNER JOIN operador AS S ON (S.id_operador = O.id_operador");
-			while(rs.next()){
-				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
-				seguimientos.add(seguimiento);
-			}
-			conn.close();
-			
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return seguimientos;
-	}
-	
 	public Seguimiento obtenerSeguimientoPorCodigo(String codigo) {
 		
 		Seguimiento seguimiento = null;
@@ -104,35 +77,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		//t.setSeguimientoMT(seguimientoMT);
 		return seguimientoMT;
-	}
-	
-	public ArrayList<Seguimiento> obtenerSeguimientosPorCodigo(String codigo){
-		
-		ArrayList<Seguimiento> seguimientos = new ArrayList<>();
-		Statement stmt = null;
-		
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-			stmt = (Statement) conn.createStatement();
-			
-			ResultSet rs;
-
-			rs = stmt.executeQuery("Select * " 
-					+ "from medios_tradicionales as S inner join operador as O on (S.id_operador = O.id_operador) where S.cod_tema = '"+ codigo +"'");
-			while (rs.next()) {
-				Seguimiento seguimiento = new MediosTradicionales(rs.getString("cod_tema"), rs.getString("apellido"), rs.getInt("mintv"), rs.getInt("mincentral"), rs.getInt("cant_notas"), rs.getInt("cant_tapas"), rs.getString("apreciacion"));
-				seguimientos.add(seguimiento);
-			}
-			conn.close();
-			
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			}
-		return seguimientos;
-	
 	}
 	
 }

@@ -10,19 +10,15 @@ import com.mysql.jdbc.Statement;
 
 import consultora.objects.MediosActuales;
 import consultora.objects.Seguimiento;
-import consultora.objects.Tema;
 
-
-public class MediosActualesDAO {
+public class MediosActualesDAO extends SeguimientoDAO{
 
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
-
-	// Relevancia
-	// Calculos
 	
-	public void agregarSeguimiento(MediosActuales seguimiento) {
+	public void agregarSeguimiento(Seguimiento seguimiento) {
 	
+		MediosActuales seguimientoMA = (MediosActuales) seguimiento;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
@@ -32,14 +28,14 @@ public class MediosActualesDAO {
 	
 			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 			preparedStmt.setString(1, seguimiento.getCodigo());
-			preparedStmt.setString(2, seguimiento.getRedSocial());
-			preparedStmt.setInt(3, seguimiento.getPublicacionesApoyo());
-			preparedStmt.setInt(4, seguimiento.getMgPublicacionApoyo());
-			preparedStmt.setInt(5, seguimiento.getPublicacionesRechazo());
-			preparedStmt.setInt(6, seguimiento.getMgPublicacionRechazo());
-			preparedStmt.setInt(7, seguimiento.getPublicacionesNeutrales());
-			preparedStmt.setInt(8, seguimiento.getMgPublicacionNeutral());
-			preparedStmt.setInt(9, seguimiento.getReplicas());
+			preparedStmt.setString(2, seguimientoMA.getRedSocial());
+			preparedStmt.setInt(3, seguimientoMA.getPublicacionesApoyo());
+			preparedStmt.setInt(4, seguimientoMA.getMgPublicacionApoyo());
+			preparedStmt.setInt(5, seguimientoMA.getPublicacionesRechazo());
+			preparedStmt.setInt(6, seguimientoMA.getMgPublicacionRechazo());
+			preparedStmt.setInt(7, seguimientoMA.getPublicacionesNeutrales());
+			preparedStmt.setInt(8, seguimientoMA.getMgPublicacionNeutral());
+			preparedStmt.setInt(9, seguimientoMA.getReplicas());
 			
 	
 			preparedStmt.execute();
@@ -48,7 +44,7 @@ public class MediosActualesDAO {
 			}
 		}
 	
-	public Seguimiento obtenerSeguimientoPorCodigo(Tema t) {
+	public Seguimiento obtenerSeguimientoPorCodigo(String codigo) {
 		
 		Seguimiento seguimiento = null;
 		MediosActuales seguimientoMA = (MediosActuales) seguimiento;
@@ -62,9 +58,10 @@ public class MediosActualesDAO {
 			ResultSet rs;
 
 			rs = stmt.executeQuery("Select * " 
-					+ "from medios_actuales as S where S.cod_tema = '"+ t.getCodigo()+"'");
+					+ "from medios_actuales as S where S.cod_tema = '"+ codigo +"'");
 			while (rs.next()) {
-				seguimientoMA = new MediosActuales(rs.getString("cod_tema"), rs.getString("red_social"), rs.getInt("pub_apoyo"), rs.getInt("mg_apoyo"), rs.getInt("pub_rechazo"), rs.getInt("mg_rechazo"), rs.getInt("pub_neutral"), rs.getInt("mg_neutral"), rs.getInt("replicas"));
+				seguimientoMA = new MediosActuales(rs.getString("cod_tema"), rs.getString("red_social"), rs.getInt("pub_apoyo"), 
+						rs.getInt("mg_apoyo"), rs.getInt("pub_rechazo"), rs.getInt("mg_rechazo"), rs.getInt("pub_neutral"), rs.getInt("mg_neutral"), rs.getInt("replicas"));
 			
 			}
 			conn.close();
@@ -72,8 +69,8 @@ public class MediosActualesDAO {
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		t.setSeguimientoMA(seguimientoMA);
 		return seguimientoMA;
 	}
+
 }
 

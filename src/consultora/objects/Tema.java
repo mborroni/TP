@@ -1,24 +1,27 @@
 package consultora.objects;
 import java.util.Date;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class Tema {
 
 	private String codigo;
 	private String palabraClave;
-	private Date inicio;
-	private Date fin;
+	private LocalDate inicio;
+	private LocalDate fin;
 	private String descripcion;
 	private MediosTradicionales seguimientoMT;
 	private MediosActuales seguimientoMA;
 
-	public Tema(String codigo, String palabraClave, Date inicio, Date fin, String descripcion, MediosTradicionales seguimientoMT) {
+	public Tema(String codigo, String palabraClave, Date inicio, Date fin, String descripcion, MediosTradicionales seguimientoMT, MediosActuales seguimientoMA) {
 		this.codigo = codigo;
 		this.palabraClave = palabraClave;
-		this.setInicio(inicio);
-		this.setFin(fin);
+		this.inicio = toLocalDate(inicio);
+		this.fin = toLocalDate(fin);
 		this.descripcion = descripcion;
 		this.seguimientoMT = seguimientoMT;
+		this.seguimientoMA = seguimientoMA;
 	}
 
 	public String getCodigo() {
@@ -37,27 +40,20 @@ public class Tema {
 		this.palabraClave = palabraClave;
 	}
  
-	public Date getInicio() {
+	public LocalDate getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Date inicio) {
+	public void setInicio(LocalDate inicio) {
 		this.inicio = inicio;
-		/*ZoneId defaultZoneId = ZoneId.systemDefault();
-		Instant instant = inicio.toInstant();
-		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();*/
 	}
 
-	public Date getFin() {
+	public LocalDate getFin() {
 		return fin;
 	}
 
-	public void setFin(Date fin) {
+	public void setFin(LocalDate fin) {
 		this.fin = fin;
-		
-		/*ZoneId defaultZoneId = ZoneId.systemDefault();
-		Instant instant = fin.toInstant();
-		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();*/
 	}
 
 	public String getDescripcion() {
@@ -84,6 +80,11 @@ public class Tema {
 		this.seguimientoMT = seguimientoMT;
 	}
 	
-	// TODO Local Date
-
+	public LocalDate toLocalDate(Date date){
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		Instant instant = date.toInstant();
+		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+		return localDate;
+	}
+	
 }
