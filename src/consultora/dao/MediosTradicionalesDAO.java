@@ -37,7 +37,7 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 					+ " values (?, ?, ?, ?, ?, ?, ?)";
 
 			ResultSet rs = stmt.executeQuery ("SELECT id_operador FROM operador WHERE apellido LIKE '" 
-					+ seguimiento.getOperador() + "'");
+					+seguimientoMT.getOperador() + "'");
 			while (rs.next()){
 				id_operador = rs.getInt("id_operador");	
 			}
