@@ -64,6 +64,9 @@ public class Detalle extends JSplitPane {
 		
 		medioTradicional = temaSelect.getSeguimientoMT();
 		medioActual = temaSelect.getSeguimientoMA();
+		
+		// TODO if null > seguimiento (vacio)
+		
 		setLayout(null);
 		
 		/*
@@ -194,6 +197,7 @@ public class Detalle extends JSplitPane {
 		panel.add(lblMediosTradicionales);
 		
 		// Medio Actual
+		// TODO Medio Actual
 		
 		JLabel lblCod = new JLabel("Red Social");
 		lblCod.setFont(new Font("Calibri", Font.PLAIN, 16));
@@ -254,9 +258,6 @@ public class Detalle extends JSplitPane {
 		panel.add(medioActual7);
 		medioActual7.setColumns(10);
 		
-
-
-		
 		medioTradicional1= new JTextArea(medioTradicional.getApreciacion());
 		JScrollPane scrollPane = new JScrollPane(medioTradicional1);
 		scrollPane.setBounds(475, 195, 198, 71);
@@ -272,14 +273,14 @@ public class Detalle extends JSplitPane {
 		lblCantidadNotasDiarios.setBounds(396, 268, 277, 16);
 		panel.add(lblCantidadNotasDiarios);
 		
-		medioTradicional2 = new JTextField(medioTradicional.getCantNotasDiarios());
+		medioTradicional2 = new JTextField("" + medioTradicional.getCantNotasDiarios());
 		medioTradicional2.setEditable(false);
-		medioTradicional2.setBounds(485,285, 36, 22);
+		medioTradicional2.setBounds(437,285, 84, 22);
 		panel.add(medioTradicional2);
 		medioTradicional2.setColumns(10);
 		
-		medioTradicional3 = new JTextField(medioTradicional.getCantNotasDiarios());
-		medioTradicional3.setEditable(false);
+		medioTradicional3 = new JTextField("" + medioTradicional.getCantNotasDiarios());
+		medioTradicional3.setEnabled(false);
 		medioTradicional3.setBounds(570,285, 36, 22);
 		panel.add(medioTradicional3);
 		medioTradicional3.setColumns(10);
@@ -289,13 +290,13 @@ public class Detalle extends JSplitPane {
 		lblMinutosEnTelevision.setBounds(390, 308, 287, 16);
 		panel.add(lblMinutosEnTelevision);
 		
-		medioTradicional4 = new JTextField(medioTradicional.getMinsHorarioCentral());
+		medioTradicional4 = new JTextField("" + medioTradicional.getMinsHorarioCentral());
 		medioTradicional4.setEditable(false);
 		medioTradicional4.setBounds(485,327, 36, 22);
 		panel.add(medioTradicional4);
 		medioTradicional4.setColumns(10);
 		
-		medioTradicional5 = new JTextField(medioTradicional.getMinsTelevision());
+		medioTradicional5 = new JTextField("" + medioTradicional.getMinsTelevision());
 		medioTradicional5.setEditable(false);
 		medioTradicional5.setBounds(570,327, 36, 22);
 		panel.add(medioTradicional5);

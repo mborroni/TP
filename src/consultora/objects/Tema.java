@@ -1,5 +1,6 @@
 package consultora.objects;
 import java.util.Date;
+import java.time.LocalDate;
 
 public class Tema {
 
@@ -82,5 +83,7 @@ public class Tema {
 	public void setSeguimientoMT(MediosTradicionales seguimientoMT) {
 		this.seguimientoMT = seguimientoMT;
 	}
+	
+	// TODO Local Date
 
 }
