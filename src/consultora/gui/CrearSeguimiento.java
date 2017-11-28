@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -23,6 +24,7 @@ import consultora.dao.SeguimientoDAO;
 import consultora.dao.TemaDAO;
 import consultora.objects.MediosTradicionales;
 import consultora.objects.Seguimiento;
+import consultora.objects.Tema;
 
 @SuppressWarnings("serial")
 
@@ -171,12 +173,22 @@ public class CrearSeguimiento extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				Seguimiento seguimiento = new MediosTradicionales((String)temacmbBox.getSelectedItem(), (String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), (String)apreciaciontxtArea.getText());
-				seguimientoDAO.agregarSeguimiento(seguimiento);
-				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				frame.setContentPane(new Consulta()); 
-				frame.validate();
+				
+				Tema tema = temaDAO.obtenerTemaPorCodigo(temacmbBox.getSelectedItem().toString());
+				
+				if (tema.getSeguimientoMT() == null) {
+					Seguimiento seguimiento = new MediosTradicionales((String)temacmbBox.getSelectedItem(), (String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), (String)apreciaciontxtArea.getText());
+					seguimientoDAO.agregarSeguimiento(seguimiento);
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+					frame.setContentPane(new Consulta()); 
+					frame.validate();
+				}
+				else {
+					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnAceptar),
+							"Ya existe un seguimiento relacionado a este Tema", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+					
+				
 			}
 		});
 		panel.add(btnAceptar);
