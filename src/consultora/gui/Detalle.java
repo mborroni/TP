@@ -59,19 +59,18 @@ public class Detalle extends JSplitPane {
 	private JLabel lblMinutosEnTelevision;
 
 	public Detalle(Tema temaSelect) {
+		
+		medioActual = temaSelect.getSeguimientoMA();
+		medioTradicional = temaSelect.getSeguimientoMT();
 
 		
 		if (medioActual == null){
 			medioActual = new MediosActuales("", "", 0, 0, 0, 0, 0, 0, 0);
 		}
-		else
-			medioTradicional = temaSelect.getSeguimientoMT();
-		
 		if (medioTradicional == null){
 			medioTradicional =  new MediosTradicionales("", "", 0, 0, 0, 0, "");
 		}
-		else
-			medioActual = temaSelect.getSeguimientoMA();
+			
 			
 			
 		setLayout(null);
