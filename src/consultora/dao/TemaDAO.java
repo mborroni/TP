@@ -71,8 +71,7 @@ public class TemaDAO {
 			rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin, descripcion FROM tema");
 			while (rs.next()) {
 
-				MediosTradicionales mt = (MediosTradicionales) mtDAO
-						.obtenerSeguimientoPorCodigo(rs.getString("cod_tema"));
+				MediosTradicionales mt = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(rs.getString("cod_tema"));
 				 MediosActuales ma = (MediosActuales) maDAO.obtenerSeguimientoPorCodigo(rs.getString("cod_tema"));				
 				 Tema tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"), rs.getDate("fecha_inicio"), 
 						 rs.getDate("fecha_fin"), rs.getString("descripcion"), mt, ma); 
@@ -147,7 +146,7 @@ public class TemaDAO {
 	public ArrayList<Tema> buscarTema(String texto) {
 
 		MediosTradicionales mt = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(texto);
-		MediosActuales ma = (MediosActuales) mtDAO.obtenerSeguimientoPorCodigo(texto);
+		MediosActuales ma = (MediosActuales) maDAO.obtenerSeguimientoPorCodigo(texto);
 		Statement stmt = null;
 		ArrayList<Tema> temas = new ArrayList<Tema>();
 		try {
@@ -176,7 +175,7 @@ public class TemaDAO {
 	public Tema obtenerTemaPorCodigo(String codigo) {
 
 		MediosTradicionales mt = (MediosTradicionales) mtDAO.obtenerSeguimientoPorCodigo(codigo);
-		MediosActuales ma = (MediosActuales) mtDAO.obtenerSeguimientoPorCodigo(codigo);
+		MediosActuales ma = (MediosActuales) maDAO.obtenerSeguimientoPorCodigo(codigo);
 		Tema tema = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

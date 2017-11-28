@@ -81,9 +81,7 @@ public class Tema {
 	}
 	
 	public LocalDate toLocalDate(Date date){
-		ZoneId defaultZoneId = ZoneId.systemDefault();
-		Instant instant = date.toInstant();
-		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+		LocalDate localDate = Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
 		return localDate;
 	}
 	

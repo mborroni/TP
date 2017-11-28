@@ -52,8 +52,8 @@ public class Detalle extends JSplitPane {
 	private JTextField medioTradicional4;
 	private JTextField medioTradicional5;
 
-	private MediosActuales medioActual;
-	private MediosTradicionales medioTradicional;
+	private MediosActuales medioActual = new MediosActuales(null, null, 0, 0, 0, 0, 0, 0, 0);
+	private MediosTradicionales medioTradicional = new MediosTradicionales(null, null, 0, 0, 0, 0, null);
 	private JLabel lblApreciacin;
 	private JLabel lblCantidadNotasDiarios;
 	private JLabel lblMinutosEnTelevision;
@@ -64,6 +64,7 @@ public class Detalle extends JSplitPane {
 		medioActual = temaSelect.getSeguimientoMA();
 
 		// TODO if null > seguimiento (vacio)
+		
 		
 
 		setLayout(null);
@@ -320,4 +321,6 @@ public class Detalle extends JSplitPane {
 		});
 
 	}
+	
+
 }
