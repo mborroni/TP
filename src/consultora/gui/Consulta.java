@@ -157,14 +157,13 @@ public class Consulta extends JSplitPane {
 		table.addMouseListener(new MouseAdapter()  {
 			
 			public void mousePressed(MouseEvent mouseEvent) {
-		        //mouseEvent.getSource();
+
 		        Point point = mouseEvent.getPoint();
 		        String temaSeleccionado = table.getValueAt(table.rowAtPoint(point),0).toString();
 		        
 		        if (mouseEvent.getClickCount() == 2) {
 		        	
 		        	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(temaSeleccionado);
-		        	//Tema temaSelect = temas.get(temas.size() - 1);
 				 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
 					frame.setContentPane(new Detalle(temaSelect)); 
 					frame.validate(); 
@@ -254,11 +253,10 @@ public class Consulta extends JSplitPane {
 			    public void actionPerformed(ActionEvent arg0) {
 			    
 				 if (table.getSelectedRow() != -1){
-					 	/*
-					 	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+					 	
 					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
-					 	frame.setContentPane(new Detalle(temaSelect)); 
-						frame.validate();*/
+					 	frame.setContentPane(new Modificar()); 
+						frame.validate();
 						
 					} 
 				 else {
