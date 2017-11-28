@@ -2,7 +2,9 @@ package consultora.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -56,7 +59,7 @@ public class Consulta extends JSplitPane {
 	//DAOS
 	private TemaDAO temaDAO = new TemaDAO();
 	
-	public static boolean isEditable;
+	private Dimension dialogDimension = new Dimension(500, 200);
 
 	public Consulta() {
 
@@ -163,10 +166,28 @@ public class Consulta extends JSplitPane {
 		        
 		        if (mouseEvent.getClickCount() == 2) {
 		        	
+		        	// http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
+		        	
 		        	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(temaSeleccionado);
-				 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
+		        	
+		        	final JDialog dialog = new JDialog();
+
+					dialog.setMinimumSize(dialogDimension);
+
+					dialog.setLayout(null);
+					
+					dialog.setLocationRelativeTo(getParent());
+					dialog.setModal(true);
+
+					dialog.pack();
+					dialog.setVisible(true);
+        	
+				 	
+		        	/*
+		        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
 					frame.setContentPane(new Detalle(temaSelect)); 
-					frame.validate(); 
+					frame.validate();
+					*/ 
 		        }
 		    }
 		});
