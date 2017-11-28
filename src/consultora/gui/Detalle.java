@@ -52,21 +52,28 @@ public class Detalle extends JSplitPane {
 	private JTextField medioTradicional4;
 	private JTextField medioTradicional5;
 
-	private MediosActuales medioActual = new MediosActuales(null, null, 0, 0, 0, 0, 0, 0, 0);
-	private MediosTradicionales medioTradicional = new MediosTradicionales(null, null, 0, 0, 0, 0, null);
+	private MediosActuales medioActual;
+	private MediosTradicionales medioTradicional;
 	private JLabel lblApreciacin;
 	private JLabel lblCantidadNotasDiarios;
 	private JLabel lblMinutosEnTelevision;
 
 	public Detalle(Tema temaSelect) {
 
-		medioTradicional = temaSelect.getSeguimientoMT();
-		medioActual = temaSelect.getSeguimientoMA();
-
-		// TODO if null > seguimiento (vacio)
 		
+		if (medioActual == null){
+			medioActual = new MediosActuales("", "", 0, 0, 0, 0, 0, 0, 0);
+		}
+		else
+			medioTradicional = temaSelect.getSeguimientoMT();
 		
-
+		if (medioTradicional == null){
+			medioTradicional =  new MediosTradicionales("", "", 0, 0, 0, 0, "");
+		}
+		else
+			medioActual = temaSelect.getSeguimientoMA();
+			
+			
 		setLayout(null);
 
 		/*
@@ -201,7 +208,7 @@ public class Detalle extends JSplitPane {
 		lblCod.setBounds(437, 41, 75, 16);
 		panel.add(lblCod);
 
-		medioActual1 = new JTextField();// medioActual.getRedSocial());
+		medioActual1 = new JTextField(medioActual.getRedSocial());
 		medioActual1.setBounds(517, 37, 116, 22);
 		panel.add(medioActual1);
 		medioActual1.setEditable(false);
@@ -213,19 +220,19 @@ public class Detalle extends JSplitPane {
 		lblMgApoyo.setBounds(445, 66, 216, 16);
 		panel.add(lblMgApoyo);
 
-		medioActual2 = new JTextField();// medioActual.getMgPublicacionApoyo());
+		medioActual2 = new JTextField("" + medioActual.getMgPublicacionApoyo());
 		medioActual2.setEditable(false);
 		medioActual2.setBounds(471, 95, 36, 22);
 		panel.add(medioActual2);
 		medioActual2.setColumns(10);
 
-		medioActual3 = new JTextField();// medioActual.getMgPublicacionNeutral());
+		medioActual3 = new JTextField("" + medioActual.getMgPublicacionNeutral());
 		medioActual3.setEditable(false);
 		medioActual3.setBounds(522, 95, 36, 22);
 		panel.add(medioActual3);
 		medioActual3.setColumns(10);
 
-		medioActual4 = new JTextField();// medioActual.getMgPublicacionRechazo());
+		medioActual4 = new JTextField("" + medioActual.getMgPublicacionRechazo());
 		medioActual4.setEditable(false);
 		medioActual4.setBounds(570, 95, 36, 22);
 		panel.add(medioActual4);
@@ -236,19 +243,19 @@ public class Detalle extends JSplitPane {
 		lblPostApoyoneutralrechazo.setBounds(437, 125, 216, 16);
 		panel.add(lblPostApoyoneutralrechazo);
 
-		medioActual5 = new JTextField();// medioActual.getPublicacionesApoyo());
+		medioActual5 = new JTextField("" + medioActual.getPublicacionesApoyo());
 		medioActual5.setEditable(false);
 		medioActual5.setBounds(471, 144, 36, 22);
 		panel.add(medioActual5);
 		medioActual5.setColumns(10);
 
-		medioActual6 = new JTextField();// medioActual.getPublicacionesNeutrales());
+		medioActual6 = new JTextField("" + medioActual.getPublicacionesNeutrales());
 		medioActual6.setEditable(false);
 		medioActual6.setBounds(522, 144, 36, 22);
 		panel.add(medioActual6);
 		medioActual6.setColumns(10);
 
-		medioActual7 = new JTextField();// medioActual.getPublicacionesRechazo());
+		medioActual7 = new JTextField("" + medioActual.getPublicacionesRechazo());
 		medioActual7.setEditable(false);
 		medioActual7.setBounds(570, 144, 36, 22);
 		panel.add(medioActual7);
@@ -271,12 +278,12 @@ public class Detalle extends JSplitPane {
 
 		medioTradicional2 = new JTextField("" + medioTradicional.getCantNotasDiarios());
 		medioTradicional2.setEditable(false);
-		medioTradicional2.setBounds(437, 285, 84, 22);
+		medioTradicional2.setBounds(437, 285, 36, 22);
 		panel.add(medioTradicional2);
 		medioTradicional2.setColumns(10);
 
 		medioTradicional3 = new JTextField("" + medioTradicional.getCantNotasDiarios());
-		medioTradicional3.setEnabled(false);
+		medioTradicional3.setEditable(false);
 		medioTradicional3.setBounds(570, 285, 36, 22);
 		panel.add(medioTradicional3);
 		medioTradicional3.setColumns(10);
