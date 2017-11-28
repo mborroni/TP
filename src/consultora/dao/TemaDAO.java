@@ -1,6 +1,7 @@
 package consultora.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -207,8 +208,7 @@ public class TemaDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
 
-			PreparedStatement preparedStmt = (PreparedStatement) conn
-					.prepareStatement("DELETE FROM tema WHERE cod_tema = '" + codigo + "'");
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("DELETE FROM tema WHERE cod_tema = '" + codigo + "'");
 			preparedStmt.execute();
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -222,4 +222,23 @@ public class TemaDAO {
 	 * UPDATE TEMA
 	 */
 
+	public void actualizarTema (Tema t) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("UPDATE tema SET palabra_clave = ?, fecha_inicio = ?, fecha_fin = ?, descripcion = ? WHERE cod_tema = '" + t.getCodigo() + "'");
+			preparedStmt.setString(1, t.getPalabraClave());
+			preparedStmt.setDate(2, Date.valueOf(t.getInicio()));
+			preparedStmt.setDate(3, Date.valueOf(t.getFin()));
+			preparedStmt.setString(4, t.getDescripcion());
+			preparedStmt.execute();
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
 }
+	

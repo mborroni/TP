@@ -67,10 +67,6 @@ public class MediosTradicionales extends Seguimiento{
 	public void setCantTapasRevistas(int cantTapasRevistas) {
 		this.cantTapasRevistas = cantTapasRevistas;
 	}
-
-	public boolean esApoyado() {
-		return false;
-	}
 	
 	/* Para los medios tradicionales (televisión y diarios): se considera trascendente un tema si
 	 *  tuvo al menos una tapa diario, si fue tratado en horario central en algún programa 

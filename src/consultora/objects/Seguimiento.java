@@ -16,8 +16,6 @@ public abstract class Seguimiento {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-
-	public abstract boolean esApoyado();
 	
 	public abstract boolean esTrascendente();
 	

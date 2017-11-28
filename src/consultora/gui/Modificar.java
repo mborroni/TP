@@ -6,5 +6,6 @@ import javax.swing.JPanel;
 
 public class Modificar extends JPanel{
 
+	// TODO Pantalla modificar
 
 }

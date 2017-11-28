@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
@@ -80,5 +82,30 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 		}
 		return seguimiento;
 	}
-	
+
+	/*
+	 * UPDATE TEMA
+	 */
+
+	public void actualizarSeguimiento (MediosTradicionales mt) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("UPDATE medios_tradicionales SET apellido = ?, "
+					+ "mintv= ?, mincentral= ?, cant_notas = ?, cant_tapas = ?, apreciacion = ? WHERE cod_tema = '" + mt.getCodigo() + "'");
+			preparedStmt.setString(1, mt.getOperador());
+			preparedStmt.setInt(2, mt.getMinsTelevision());
+			preparedStmt.setInt(3, mt.getMinsHorarioCentral());
+			preparedStmt.setInt(4, mt.getCantNotasDiarios());
+			preparedStmt.setInt(5, mt.getCantTapasRevistas());
+			preparedStmt.setString(6, mt.getApreciacion());			
+
+			preparedStmt.execute();
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
 }
