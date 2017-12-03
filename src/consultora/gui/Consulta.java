@@ -160,31 +160,14 @@ public class Consulta extends JSplitPane {
 
 			public void mousePressed(MouseEvent mouseEvent) {
 
-				//Point point = mouseEvent.getPoint();
-				//String temaSeleccionado = table.getValueAt(table.rowAtPoint(point), 0).toString();
+				Point point = mouseEvent.getPoint();
 
 				if (mouseEvent.getClickCount() == 2) {
 
-					// http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
-
-					final JDialog dialog = new JDialog();
-
-					dialog.setMinimumSize(dialogDimension);
-
-					dialog.setLayout(null);
-
-					dialog.setLocationRelativeTo(getParent());
-					dialog.setModal(true);
-
-					dialog.pack();
-					dialog.setVisible(true);
-
-					/*
-					 * JFrame frame = (JFrame)
-					 * SwingUtilities.getWindowAncestor((Component)
-					 * mouseEvent.getSource()); frame.setContentPane(new
-					 * Detalle(temaSelect)); frame.validate();
-					 */
+					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.rowAtPoint(point), 0).toString());
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
+					frame.setContentPane(new ModificarTema(temaSelect));
+					frame.validate();
 				}
 			}
 		});
@@ -270,7 +253,8 @@ public class Consulta extends JSplitPane {
 
 				if (table.getSelectedRow() != -1) {
 
-					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+					Tema temaSelect = temaDAO
+							.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
 					frame.setContentPane(new ModificarSeguimiento(temaSelect));
 					frame.validate();
@@ -325,7 +309,8 @@ public class Consulta extends JSplitPane {
 
 				if (table.getSelectedRow() != -1) {
 
-					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+					Tema temaSelect = temaDAO
+							.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
 					frame.setContentPane(new Detalle(temaSelect));
 					frame.validate();
