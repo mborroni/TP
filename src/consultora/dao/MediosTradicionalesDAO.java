@@ -84,47 +84,27 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 
 	/*
 	 * UPDATE TEMA
-	 */
-
-	/*public void actualizarSeguimiento (MediosTradicionales mt) {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-
-			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("UPDATE medios_tradicionales SET apellido = ?, "
-					+ "mintv= ?, mincentral= ?, cant_notas = ?, cant_tapas = ?, apreciacion = ? WHERE cod_tema = '" + mt.getCodigo() + "'");
-			preparedStmt.setString(1, mt.getOperador());
-			preparedStmt.setInt(2, mt.getMinsTelevision());
-			preparedStmt.setInt(3, mt.getMinsHorarioCentral());
-			preparedStmt.setInt(4, mt.getCantNotasDiarios());
-			preparedStmt.setInt(5, mt.getCantTapasRevistas());
-			preparedStmt.setString(6, mt.getApreciacion());			
-
-			preparedStmt.execute();
-			conn.close();
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e);
-		}
-	}*/
+	 */	
 	
-	
-	public void actualizarSeguimiento(MediosTradicionales mt) {
+	public void actualizarSeguimiento(Seguimiento seguimiento) {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-
-			PreparedStatement ps = conn.prepareStatement("UPDATE medios_tradicionales SET apellido = ?, "
-					+ "mintv= ?, mincentral= ?, cant_notas = ?, cant_tapas = ?, apreciacion = ? WHERE cod_tema = ?");
-			ps.setString(1, mt.getOperador());
-			ps.setInt(2, mt.getMinsTelevision());
-			ps.setInt(3, mt.getMinsHorarioCentral());
-			ps.setInt(4, mt.getCantNotasDiarios());
-			ps.setInt(5, mt.getCantTapasRevistas());
-			ps.setString(6, mt.getApreciacion());		
-			ps.setString(7, mt.getCodigo() + "%");
-			ps.executeQuery();
+			
+			MediosTradicionales seguimientoMT = (MediosTradicionales) seguimiento;
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE medios_tradicionales SET apellido=?, "
+					+ "mintv=?, mincentral=?, cant_notas=?, cant_tapas=?, apreciacion=? WHERE cod_tema=?");
+			ps.setString(1, seguimientoMT.getOperador());
+			ps.setInt(2, seguimientoMT.getMinsTelevision());
+			ps.setInt(3, seguimientoMT.getMinsHorarioCentral());
+			ps.setInt(4, seguimientoMT.getCantNotasDiarios());
+			ps.setInt(5, seguimientoMT.getCantTapasRevistas());
+			ps.setString(6, seguimientoMT.getApreciacion());		
+			ps.setString(7, seguimientoMT.getCodigo());
+			ps.executeUpdate();
+	        
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

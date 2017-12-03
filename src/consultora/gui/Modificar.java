@@ -219,7 +219,8 @@ public class Modificar extends JPanel {
 						Integer.parseInt(cantNotasDiarios.getText()), Integer.parseInt(cantTapasRevista.getText()),
 						apreciacion.getText());
 				
-				mtDAO.actualizarSeguimiento((MediosTradicionales) seguimientoMT);
+				
+				mtDAO.actualizarSeguimiento(seguimientoMT);
 				
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				frame.setContentPane(new Consulta());
