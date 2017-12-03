@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -161,14 +160,12 @@ public class Consulta extends JSplitPane {
 
 			public void mousePressed(MouseEvent mouseEvent) {
 
-				Point point = mouseEvent.getPoint();
-				String temaSeleccionado = table.getValueAt(table.rowAtPoint(point), 0).toString();
+				//Point point = mouseEvent.getPoint();
+				//String temaSeleccionado = table.getValueAt(table.rowAtPoint(point), 0).toString();
 
 				if (mouseEvent.getClickCount() == 2) {
 
 					// http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
-
-					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(temaSeleccionado);
 
 					final JDialog dialog = new JDialog();
 
@@ -328,8 +325,7 @@ public class Consulta extends JSplitPane {
 
 				if (table.getSelectedRow() != -1) {
 
-					Tema temaSelect = temaDAO
-							.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
 					frame.setContentPane(new Detalle(temaSelect));
 					frame.validate();
