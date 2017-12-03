@@ -208,7 +208,7 @@ public class TemaDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
 
-			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("DELETE FROM tema WHERE cod_tema = '" + codigo + "'");
+			PreparedStatement preparedStmt = conn.prepareStatement("DELETE FROM tema WHERE cod_tema = '" + codigo + "'");
 			preparedStmt.execute();
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -227,12 +227,12 @@ public class TemaDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
 
-			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("UPDATE tema SET palabra_clave = ?, fecha_inicio = ?, fecha_fin = ?, descripcion = ? WHERE cod_tema = '" + t.getCodigo() + "'");
+			PreparedStatement preparedStmt = conn.prepareStatement("UPDATE tema SET palabra_clave = ?, fecha_inicio = ?, fecha_fin = ?, descripcion = ? WHERE cod_tema = '" + t.getCodigo() + "'");
 			preparedStmt.setString(1, t.getPalabraClave());
 			preparedStmt.setDate(2, Date.valueOf(t.getInicio()));
 			preparedStmt.setDate(3, Date.valueOf(t.getFin()));
 			preparedStmt.setString(4, t.getDescripcion());
-			preparedStmt.execute();
+			preparedStmt.executeUpdate();
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

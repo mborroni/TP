@@ -139,8 +139,8 @@ public class ModificarTema extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				Tema tema = new Tema(codigotxtFld.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(),
-						fechaFin.getDate(), descripciontxtArea.getText(), null, null);
-				temaDAO.agregarTema(tema);
+						fechaFin.getDate(), descripciontxtArea.getText(), t.getSeguimientoMT(), t.getSeguimientoMA());
+				temaDAO.actualizarTema(tema);
 
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				frame.setContentPane(new Consulta());

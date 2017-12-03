@@ -240,7 +240,7 @@ public class Consulta extends JSplitPane {
 		});
 		panel.add(btnCrearSeguimiento);
 
-		btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar seg.");
 		btnModificar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnModificar.setBounds(3, 170, 157, 33);
 		btnModificar.setIcon(new ImageIcon(this.getClass().getResource("/Modificar.png")));
