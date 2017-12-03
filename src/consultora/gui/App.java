@@ -78,7 +78,7 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(new Crear()); // CrearTema
+				setContentPane(new CrearTema()); // CrearTema
 				validate();
 			}
 		});

@@ -24,7 +24,7 @@ import consultora.dao.TemaDAO;
 import consultora.objects.Tema;
 @SuppressWarnings("serial")
 
-public class Crear extends JPanel {
+public class CrearTema extends JPanel {
 
 	private JTextField palabraClavetxtFld;
 	private JTextField codigotxtFld;
@@ -36,7 +36,7 @@ public class Crear extends JPanel {
 
 	private TemaDAO temaDAO = new TemaDAO();
 
-	public Crear() {
+	public CrearTema() {
 
 		setLayout(null);
 

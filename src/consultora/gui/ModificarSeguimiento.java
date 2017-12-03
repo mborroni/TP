@@ -24,7 +24,7 @@ import consultora.objects.Tema;
 
 @SuppressWarnings("serial")
 
-public class Modificar extends JPanel {
+public class ModificarSeguimiento extends JPanel {
 
 	private JButton btnCancelar;
 	private JButton btnAceptar;
@@ -48,7 +48,7 @@ public class Modificar extends JPanel {
 	private JLabel lblMinutosEnTelevision;
 	private MediosTradicionalesDAO mtDAO;
 
-	public Modificar(Tema temaSelect) {
+	public ModificarSeguimiento(Tema temaSelect) {
 
 		medioActual = temaSelect.getSeguimientoMA();
 		medioTradicional = temaSelect.getSeguimientoMT();

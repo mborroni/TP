@@ -229,7 +229,7 @@ public class Consulta extends JSplitPane {
 			public void actionPerformed(ActionEvent e) {
 
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				frame.setContentPane(new Crear());
+				frame.setContentPane(new CrearTema());
 				frame.validate();
 			}
 		});
@@ -272,7 +272,7 @@ public class Consulta extends JSplitPane {
 
 					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
-					frame.setContentPane(new Modificar(temaSelect));
+					frame.setContentPane(new ModificarSeguimiento(temaSelect));
 					frame.validate();
 
 				} else {
