@@ -10,6 +10,12 @@ fecha_inicio date,
 fecha_fin date
 );
 
+create table operador (
+id_operador int  not null auto_increment primary key,
+nombre varchar (20),
+apellido varchar (20)
+);
+
 create table medios_tradicionales (
 cod_tema varchar (6),
 id_operador int ,
@@ -35,11 +41,6 @@ replicas int,
 foreign key (cod_tema) references tema(cod_tema) on delete cascade
 );
 
-create table operador (
-id_operador int  not null auto_increment primary key,
-nombre varchar (20),
-apellido varchar (20)
-);
 
 insert into operador (nombre, apellido) values ("Ramiro","Capria");
 insert into operador (nombre, apellido) values ("Gabriel","Gimenez");
