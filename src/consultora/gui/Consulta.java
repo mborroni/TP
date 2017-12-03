@@ -39,8 +39,8 @@ import consultora.objects.Tema;
 @SuppressWarnings("serial")
 
 public class Consulta extends JSplitPane {
-	
-	//CONSULTA
+
+	// CONSULTA
 	private JTextField busquedaTxtFld;
 	private JButton imagebutton;
 	private JLabel lblConsultas;
@@ -52,13 +52,13 @@ public class Consulta extends JSplitPane {
 	private JButton btnEliminar;
 	private JButton btnDetalle;
 
-	//JTABLE
+	// JTABLE
 	private static DefaultTableModel model;
 	private JTable table;
-	
-	//DAOS
+
+	// DAOS
 	private TemaDAO temaDAO = new TemaDAO();
-	
+
 	private Dimension dialogDimension = new Dimension(500, 200);
 
 	public Consulta() {
@@ -87,10 +87,9 @@ public class Consulta extends JSplitPane {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				ArrayList<Tema> resultado = new ArrayList<Tema>();
-				if (busquedaTxtFld.getText() == ""){
+				if (busquedaTxtFld.getText() == "") {
 					agregarTemas(temaDAO.obtenerTemas());
-				}
-				else {
+				} else {
 					resultado.addAll(temaDAO.buscarTema(busquedaTxtFld.getText()));
 					agregarTemas(resultado);
 				}
@@ -108,9 +107,9 @@ public class Consulta extends JSplitPane {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-					ArrayList<Tema> resultado = new ArrayList<Tema>();
-					resultado.addAll(temaDAO.buscarTema(busquedaTxtFld.getText()));
-					agregarTemas(resultado);
+				ArrayList<Tema> resultado = new ArrayList<Tema>();
+				resultado.addAll(temaDAO.buscarTema(busquedaTxtFld.getText()));
+				agregarTemas(resultado);
 
 			}
 		});
@@ -143,56 +142,56 @@ public class Consulta extends JSplitPane {
 		table.getTableHeader().setResizingAllowed(false);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		model.addColumn("Codigo tema");
 		model.addColumn("Palabra clave");
 		model.addColumn("Inicio");
 		model.addColumn("Fin");
-		
+
 		agregarTemas(temaDAO.obtenerTemas());
-		
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(180, 10, 537, 382);
 		scrollPane.setViewportBorder(null);
-		scrollPane.getViewport().setBackground(new Color(252, 252, 252));;
+		scrollPane.getViewport().setBackground(new Color(252, 252, 252));
+		;
 		panel.add(scrollPane);
-		
-		table.addMouseListener(new MouseAdapter()  {
-			
+
+		table.addMouseListener(new MouseAdapter() {
+
 			public void mousePressed(MouseEvent mouseEvent) {
 
-		        Point point = mouseEvent.getPoint();
-		        String temaSeleccionado = table.getValueAt(table.rowAtPoint(point),0).toString();
-		        
-		        if (mouseEvent.getClickCount() == 2) {
-		        	
-		        	// http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
-		        	
-		        	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(temaSeleccionado);
-		        	
-		        	final JDialog dialog = new JDialog();
+				Point point = mouseEvent.getPoint();
+				String temaSeleccionado = table.getValueAt(table.rowAtPoint(point), 0).toString();
+
+				if (mouseEvent.getClickCount() == 2) {
+
+					// http://blue-walrus.com/2011/03/swing-table-row-displayer-in-dialog/
+
+					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(temaSeleccionado);
+
+					final JDialog dialog = new JDialog();
 
 					dialog.setMinimumSize(dialogDimension);
 
 					dialog.setLayout(null);
-					
+
 					dialog.setLocationRelativeTo(getParent());
 					dialog.setModal(true);
 
 					dialog.pack();
 					dialog.setVisible(true);
-        	
-				 	
-		        	/*
-		        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
-					frame.setContentPane(new Detalle(temaSelect)); 
-					frame.validate();
-					*/ 
-		        }
-		    }
+
+					/*
+					 * JFrame frame = (JFrame)
+					 * SwingUtilities.getWindowAncestor((Component)
+					 * mouseEvent.getSource()); frame.setContentPane(new
+					 * Detalle(temaSelect)); frame.validate();
+					 */
+				}
+			}
 		});
 
-				
 		lblFiltrar = new JLabel("Filtrar");
 		lblFiltrar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblFiltrar.setBounds(20, 18, 46, 14);
@@ -208,12 +207,11 @@ public class Consulta extends JSplitPane {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+
 				ArrayList<Tema> resultado = new ArrayList<Tema>();
-				if (filtrarCmbBox.getSelectedItem().toString() == ""){
+				if (filtrarCmbBox.getSelectedItem().toString() == "") {
 					agregarTemas(temaDAO.obtenerTemas());
-				}
-				else {
+				} else {
 					resultado.addAll(temaDAO.buscarTema(filtrarCmbBox.getSelectedItem().toString()));
 					agregarTemas(resultado);
 				}
@@ -234,7 +232,7 @@ public class Consulta extends JSplitPane {
 			public void actionPerformed(ActionEvent e) {
 
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				frame.setContentPane(new Crear()); 
+				frame.setContentPane(new Crear());
 				frame.validate();
 			}
 		});
@@ -252,11 +250,11 @@ public class Consulta extends JSplitPane {
 		btnCrearSeguimiento.setContentAreaFilled(false);
 		btnCrearSeguimiento.setBorderPainted(false);
 		btnCrearSeguimiento.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				frame.setContentPane(new CrearSeguimiento()); 
+				frame.setContentPane(new CrearSeguimiento());
 				frame.validate();
 			}
 		});
@@ -270,23 +268,23 @@ public class Consulta extends JSplitPane {
 		btnModificar.setContentAreaFilled(false);
 		btnModificar.setBorderPainted(false);
 		btnModificar.addActionListener(new ActionListener() {
-			 @Override
-			    public void actionPerformed(ActionEvent arg0) {
-			    
-				 if (table.getSelectedRow() != -1){
-					 	
-					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
-					 	frame.setContentPane(new Modificar()); 
-						frame.validate();
-						
-					} 
-				 else {
-					 JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnDetalle),
-								"No seleccionó ningún tema.", "Error", JOptionPane.ERROR_MESSAGE);
-				 }
-			 	}
-			 
-			 });
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (table.getSelectedRow() != -1) {
+
+					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
+					frame.setContentPane(new Modificar(temaSelect));
+					frame.validate();
+
+				} else {
+					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnDetalle),
+							"No seleccionó ningún tema.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+
+		});
 		panel.add(btnModificar);
 
 		btnEliminar = new JButton("Eliminar tema");
@@ -297,26 +295,26 @@ public class Consulta extends JSplitPane {
 		btnEliminar.setContentAreaFilled(false);
 		btnEliminar.setBorderPainted(false);
 		btnEliminar.addActionListener(new ActionListener() {
-			 @Override
-			    public void actionPerformed(ActionEvent arg0) {
-			        // check for selected row first
-				 try {
-				 int m = JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor(btnEliminar),
-							"¿Desea eliminar el tema " + table.getValueAt(table.getSelectedRow(), 0) + "?",
-							"Eliminar", JOptionPane.YES_NO_OPTION);
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// check for selected row first
+				try {
+					int m = JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor(btnEliminar),
+							"¿Desea eliminar el tema " + table.getValueAt(table.getSelectedRow(), 0) + "?", "Eliminar",
+							JOptionPane.YES_NO_OPTION);
 					if (m == JOptionPane.YES_OPTION && table.getSelectedRow() != -1) {
-				            //model.removeRow(table.getSelectedRow());
-				            temaDAO.eliminarTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
-				            agregarTemas(temaDAO.obtenerTemas());
-				            }
-				 } catch (Exception e) {
+						// model.removeRow(table.getSelectedRow());
+						temaDAO.eliminarTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+						agregarTemas(temaDAO.obtenerTemas());
+					}
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "No seleccionó ningun tema.");
-				 }
 				}
-			});
-		
+			}
+		});
+
 		panel.add(btnEliminar);
-		
+
 		btnDetalle = new JButton("Detalles");
 		btnDetalle.setHorizontalAlignment(SwingConstants.LEFT);
 		btnDetalle.setBounds(3, 256, 155, 33);
@@ -325,36 +323,35 @@ public class Consulta extends JSplitPane {
 		btnDetalle.setContentAreaFilled(false);
 		btnDetalle.setBorderPainted(false);
 		btnDetalle.addActionListener(new ActionListener() {
-			 @Override
-			    public void actionPerformed(ActionEvent arg0) {
-			    
-				 if (table.getSelectedRow() != -1){
-					 	
-					 	Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
-					 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
-					 	frame.setContentPane(new Detalle(temaSelect)); 
-						frame.validate();
-						
-					} 
-				 else {
-					 JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnDetalle),
-								"No seleccionó ningún tema.", "Error", JOptionPane.ERROR_MESSAGE);
-				 }
-			 	}
-			 
-			 });
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (table.getSelectedRow() != -1) {
+
+					Tema temaSelect = temaDAO
+							.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
+					frame.setContentPane(new Detalle(temaSelect));
+					frame.validate();
+
+				} else {
+					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnDetalle),
+							"No seleccionó ningún tema.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+
+		});
 		panel.add(btnDetalle);
 	}
 
 	public static void agregarTemas(ArrayList<Tema> temas) {
-		
+
 		model.setRowCount(0);
 		for (int i = 0; i < temas.size(); i++) {
-			Object[] v = { temas.get(i).getCodigo(), temas.get(i).getPalabraClave(),
-					temas.get(i).getInicio(), temas.get(i).getFin()
-					 };
+			Object[] v = { temas.get(i).getCodigo(), temas.get(i).getPalabraClave(), temas.get(i).getInicio(),
+					temas.get(i).getFin() };
 			model.addRow(v);
-	
+
 		}
 	}
 
