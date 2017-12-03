@@ -247,5 +247,3 @@ public class ModificarSeguimiento extends JPanel {
 	}
 
 }
-// TODO Pantalla modificar
-

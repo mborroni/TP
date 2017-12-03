@@ -111,7 +111,7 @@ public class App extends JFrame {
 				System.exit(1);
 			}
 		});
-
+		
 		// Menu > Consulta
 		JMenu mnConsulta = new JMenu("Consultas");
 		menuBar.add(mnConsulta);

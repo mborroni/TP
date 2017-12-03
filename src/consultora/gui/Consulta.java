@@ -58,8 +58,6 @@ public class Consulta extends JSplitPane {
 	// DAOS
 	private TemaDAO temaDAO = new TemaDAO();
 
-	private Dimension dialogDimension = new Dimension(500, 200);
-
 	public Consulta() {
 
 		setLayout(null);
