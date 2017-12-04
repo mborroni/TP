@@ -1,3 +1,4 @@
+drop database consultora;
 create database consultora;
 
 use consultora;
