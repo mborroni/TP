@@ -24,6 +24,8 @@ import com.toedter.calendar.JDateChooser;
 import consultora.objects.MediosActuales;
 import consultora.objects.MediosTradicionales;
 import consultora.objects.Tema;
+import javax.swing.JSlider;
+import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
 
@@ -52,9 +54,19 @@ public class Detalle extends JSplitPane {
 	private MediosActuales medioActual;
 	private MediosTradicionales medioTradicional;
 	private JLabel lblApreciacin;
-	private JLabel lblCantidadNotasDiarios;
-	private JLabel lblMinutosEnTelevision;
+	private JLabel lblCantidad;
+	private JLabel lblMinutos;
 	private JLabel lblEstrascendenteMT;
+	private JLabel lblHsCentral;
+	private JLabel lblTelevision;
+	private JLabel lblApoyo;
+	private JLabel lblNeutral;
+	private JLabel lblRechazo;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel lblReplicas;
+	private JTextField replicas;
 
 	public Detalle(Tema temaSelect) {
 
@@ -84,16 +96,29 @@ public class Detalle extends JSplitPane {
 		JLabel lblCodigo = new JLabel("Tema");
 		lblCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 30));
-		lblCodigo.setBounds(276, 22, 83, 32);
+		lblCodigo.setBounds(277, 13, 83, 32);
 		barra.add(lblCodigo);
 
 		codigoTema = new JTextField(temaSelect.getCodigo());
 		codigoTema.setHorizontalAlignment(SwingConstants.LEFT);
-		codigoTema.setBounds(368, 22, 120, 32);
+		codigoTema.setBounds(369, 13, 120, 32);
 		codigoTema.setFont(new Font("Calibri", Font.PLAIN, 30));
 		codigoTema.setBorder(null);
 		codigoTema.setBackground(new Color(69, 193, 100));
 		barra.add(codigoTema);
+
+		JLabel lblPalabraClave = new JLabel("Palabra Clave");
+		lblPalabraClave.setBounds(277, 53, 104, 20);
+		barra.add(lblPalabraClave);
+		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
+
+		palabraClave = new JTextField(temaSelect.getPalabraClave());
+		palabraClave.setBounds(384, 53, 151, 21);
+		palabraClave.setBorder(null);
+		palabraClave.setBackground(new Color(69, 193, 100));
+		palabraClave.setFont(new Font("Calibri", Font.PLAIN, 17));
+		palabraClave.setEditable(false);
+		barra.add(palabraClave);
 
 		/*
 		 * DETALLES
@@ -106,55 +131,49 @@ public class Detalle extends JSplitPane {
 		add(panel);
 
 		JLabel lblSeguimiento = new JLabel("Seguimiento");
-		lblSeguimiento.setBounds(29, 77, 109, 20);
+		lblSeguimiento.setBounds(29, 10, 109, 20);
 		panel.add(lblSeguimiento);
 
-		JLabel lblPalabraClave = new JLabel("Palabra Clave");
-		lblPalabraClave.setBounds(29, 38, 104, 20);
-		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
-		panel.add(lblPalabraClave);
-
-		palabraClave = new JTextField(temaSelect.getPalabraClave());
-		palabraClave.setBounds(136, 38, 151, 21);
-		palabraClave.setFont(new Font("Calibri", Font.PLAIN, 17));
-		palabraClave.setEditable(false);
-		panel.add(palabraClave);
-
 		JLabel lblDesde = new JLabel("Desde");
-		lblDesde.setBounds(58, 116, 45, 20);
+		lblDesde.setBounds(79, 38, 45, 20);
 		panel.add(lblDesde);
 
 		lblDesde.setFont(new Font("Calibri", Font.PLAIN, 16));
 
 		fechaInicio = new JDateChooser(java.sql.Date.valueOf(temaSelect.getInicio()));
-		fechaInicio.setBounds(136, 116, 151, 20);
+		fechaInicio.setBounds(139, 36, 151, 20);
 		fechaInicio.setEnabled(false);
 		panel.add(fechaInicio);
 
 		JLabel lblHasta = new JLabel("Hasta");
-		lblHasta.setBounds(58, 159, 58, 20);
+		lblHasta.setBounds(79, 66, 58, 20);
 		panel.add(lblHasta);
 		lblHasta.setFont(new Font("Calibri", Font.PLAIN, 16));
 
 		fechaFin = new JDateChooser(java.sql.Date.valueOf(temaSelect.getFin()));
-		fechaFin.setBounds(136, 159, 151, 20);
+		fechaFin.setBounds(139, 66, 151, 20);
 		fechaFin.setEnabled(false);
 		panel.add(fechaFin);
 
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setFont(new Font("Calibri", Font.PLAIN, 18));
-		lblDescripcion.setBounds(29, 198, 109, 14);
+		lblDescripcion.setBounds(387, 13, 109, 14);
 		panel.add(lblDescripcion);
 
 		descripcionTxtArea = new JTextArea(temaSelect.getDescripcion());
 		JScrollPane scrollpane = new JScrollPane(descripcionTxtArea);
-		scrollpane.setBounds(29, 223, 316, 111);
+		scrollpane.setBounds(387, 36, 306, 54);
 		descripcionTxtArea.setEditable(false);
 		panel.add(scrollpane);
 		lblSeguimiento.setFont(new Font("Calibri", Font.PLAIN, 18));
 
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(369, 102, 11, 286);
+		panel.add(separator);
+
 		JLabel lblMediosActuales = new JLabel("Medios Actuales");
-		lblMediosActuales.setBounds(471, 12, 128, 16);
+		lblMediosActuales.setBounds(100, 114, 128, 16);
 		lblMediosActuales.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblMediosActuales);
 
@@ -162,151 +181,190 @@ public class Detalle extends JSplitPane {
 
 		JLabel lblCod = new JLabel("Red Social");
 		lblCod.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblCod.setBounds(437, 41, 75, 16);
+		lblCod.setBounds(66, 143, 75, 16);
 		panel.add(lblCod);
 
 		redSocial = new JTextField(medioActual.getRedSocial());
-		redSocial.setBounds(517, 37, 116, 22);
+		redSocial.setBounds(146, 139, 116, 22);
 		panel.add(redSocial);
 		redSocial.setEditable(false);
-		redSocial.setColumns(10);
 
-		JLabel lblMgApoyo = new JLabel("Mg Apoyo/Neutral/Rechazo");
-		lblMgApoyo.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblMgApoyo.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMgApoyo.setBounds(445, 66, 216, 16);
-		panel.add(lblMgApoyo);
+		JLabel lblMg = new JLabel("Me gustas");
+		lblMg.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblMg.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMg.setBounds(29, 170, 88, 16);
+		panel.add(lblMg);
+
+		lblApoyo = new JLabel("Apoyo");
+		lblApoyo.setBounds(44, 197, 73, 14);
+		panel.add(lblApoyo);
 
 		mgPublicacionApoyo = new JTextField("" + medioActual.getMgPublicacionApoyo());
 		mgPublicacionApoyo.setEditable(false);
-		mgPublicacionApoyo.setBounds(471, 95, 36, 22);
+		mgPublicacionApoyo.setBounds(44, 213, 62, 22);
 		panel.add(mgPublicacionApoyo);
-		mgPublicacionApoyo.setColumns(10);
+
+		lblNeutral = new JLabel("Neutral");
+		lblNeutral.setBounds(128, 197, 75, 14);
+		panel.add(lblNeutral);
 
 		mgPublicacionNeutral = new JTextField("" + medioActual.getMgPublicacionNeutral());
 		mgPublicacionNeutral.setEditable(false);
-		mgPublicacionNeutral.setBounds(522, 95, 36, 22);
+		mgPublicacionNeutral.setBounds(128, 213, 62, 22);
 		panel.add(mgPublicacionNeutral);
-		mgPublicacionNeutral.setColumns(10);
+
+		lblRechazo = new JLabel("Rechazo");
+		lblRechazo.setBounds(216, 197, 74, 14);
+		panel.add(lblRechazo);
 
 		mgPublicacionRechazo = new JTextField("" + medioActual.getMgPublicacionRechazo());
 		mgPublicacionRechazo.setEditable(false);
-		mgPublicacionRechazo.setBounds(570, 95, 36, 22);
+		mgPublicacionRechazo.setBounds(216, 213, 62, 22);
 		panel.add(mgPublicacionRechazo);
-		mgPublicacionRechazo.setColumns(10);
 
-		JLabel lblPostApoyoneutralrechazo = new JLabel("Post Apoyo/Neutral/Rechazo");
-		lblPostApoyoneutralrechazo.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblPostApoyoneutralrechazo.setBounds(437, 125, 216, 16);
-		panel.add(lblPostApoyoneutralrechazo);
+		JLabel lblPublicaciones = new JLabel("Publicaciones");
+		lblPublicaciones.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblPublicaciones.setBounds(29, 249, 109, 16);
+		panel.add(lblPublicaciones);
+
+		label = new JLabel("Apoyo");
+		label.setBounds(44, 273, 73, 14);
+		panel.add(label);
 
 		publicacionApoyo = new JTextField("" + medioActual.getPublicacionesApoyo());
 		publicacionApoyo.setEditable(false);
-		publicacionApoyo.setBounds(471, 144, 36, 22);
+		publicacionApoyo.setBounds(44, 291, 62, 22);
 		panel.add(publicacionApoyo);
-		publicacionApoyo.setColumns(10);
+
+		label_1 = new JLabel("Neutral");
+		label_1.setBounds(128, 273, 75, 14);
+		panel.add(label_1);
 
 		publicacionNeutral = new JTextField("" + medioActual.getPublicacionesNeutrales());
 		publicacionNeutral.setEditable(false);
-		publicacionNeutral.setBounds(522, 144, 36, 22);
+		publicacionNeutral.setBounds(128, 291, 62, 22);
 		panel.add(publicacionNeutral);
-		publicacionNeutral.setColumns(10);
+
+		label_2 = new JLabel("Rechazo");
+		label_2.setBounds(216, 273, 74, 14);
+		panel.add(label_2);
 
 		publicacionRechazo = new JTextField("" + medioActual.getPublicacionesRechazo());
 		publicacionRechazo.setEditable(false);
-		publicacionRechazo.setBounds(570, 144, 36, 22);
+		publicacionRechazo.setBounds(216, 291, 62, 22);
 		panel.add(publicacionRechazo);
-		publicacionRechazo.setColumns(10);
-		
-		JLabel lblEsapoyado = new JLabel("");
-		lblEsapoyado.setBounds(29, 345, 94, 14);
-		if (medioActual.esApoyado()){
-			lblEsapoyado.setText("Fue apoyado en las redes sociales");
-		}
-		else
-			lblEsapoyado.setText("No fue apoyado en las redes sociales");
+
+		lblReplicas = new JLabel("Replicas");
+		lblReplicas.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblReplicas.setBounds(29, 339, 77, 14);
+		panel.add(lblReplicas);
+
+		replicas = new JTextField("" + medioActual.getReplicas());
+		replicas.setBounds(129, 336, 62, 20);
+		panel.add(replicas);
+
+		JLabel lblEsapoyado = new JLabel("Es apoyado.");
+		lblEsapoyado.setBounds(189, 374, 170, 14);
+		if (medioActual.esApoyado()) {
+			lblEsapoyado.setText("Fue apoyado.");
+		} else
+			lblEsapoyado.setText("No fue apoyado.");
 		panel.add(lblEsapoyado);
 
 		JLabel lblEstrascendenteMA = new JLabel("EsTrascendente");
-		lblEstrascendenteMA.setBounds(178, 345, 164, 14);
-		if (medioActual.esTrascendente()){
-			lblEstrascendenteMA.setText("Es trascendente");
-		}
-		else
-			lblEstrascendenteMA.setText("No es trascendente");
+		lblEstrascendenteMA.setBounds(29, 374, 133, 14);
+		if (medioActual.esTrascendente()) {
+			lblEstrascendenteMA.setText("Es trascendente.");
+		} else
+			lblEstrascendenteMA.setText("No es trascendente.");
 		panel.add(lblEstrascendenteMA);
 
 		JLabel lblMediosTradicionales = new JLabel("Medios Tradicionales");
 		lblMediosTradicionales.setFont(new Font("Calibri", Font.PLAIN, 18));
-		lblMediosTradicionales.setBounds(455, 175, 178, 16);
+		lblMediosTradicionales.setBounds(471, 114, 178, 16);
 		panel.add(lblMediosTradicionales);
 
 		lblApreciacin = new JLabel("Apreciaci\u00F3n:");
 		lblApreciacin.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblApreciacin.setBounds(386, 198, 80, 16);
+		lblApreciacin.setBounds(402, 137, 80, 16);
 		panel.add(lblApreciacin);
 
 		medioTradicional1 = new JTextArea(medioTradicional.getApreciacion());
+		medioTradicional1.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(medioTradicional1);
-		scrollPane.setBounds(475, 195, 198, 71);
+		scrollPane.setBounds(491, 134, 198, 71);
 		panel.add(scrollPane);
 
-		lblCantidadNotasDiarios = new JLabel("Cantidad Notas Diarios/Tapas de Revista");
-		lblCantidadNotasDiarios.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblCantidadNotasDiarios.setBounds(396, 268, 277, 16);
-		panel.add(lblCantidadNotasDiarios);
+		lblCantidad = new JLabel("Cantidad");
+		lblCantidad.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblCantidad.setBounds(402, 216, 94, 16);
+		panel.add(lblCantidad);
+
+		JLabel lblNotasDiarios = new JLabel("Notas Diarios");
+		lblNotasDiarios.setBounds(471, 228, 94, 14);
+		panel.add(lblNotasDiarios);
 
 		cantNotasDiarios = new JTextField("" + medioTradicional.getCantNotasDiarios());
 		cantNotasDiarios.setEditable(false);
-		cantNotasDiarios.setBounds(485, 285, 36, 22);
+		cantNotasDiarios.setBounds(471, 246, 62, 22);
 		panel.add(cantNotasDiarios);
 		cantNotasDiarios.setColumns(10);
 
+		JLabel lblTapasRevistas = new JLabel("Tapas Revistas");
+		lblTapasRevistas.setBounds(572, 228, 101, 14);
+		panel.add(lblTapasRevistas);
+
 		cantTapasRevistas = new JTextField("" + medioTradicional.getCantNotasDiarios());
 		cantTapasRevistas.setEditable(false);
-		cantTapasRevistas.setBounds(570, 285, 36, 22);
+		cantTapasRevistas.setBounds(572, 246, 62, 22);
 		panel.add(cantTapasRevistas);
 		cantTapasRevistas.setColumns(10);
 
-		lblMinutosEnTelevision = new JLabel("Minutos Horario Central/Television");
-		lblMinutosEnTelevision.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblMinutosEnTelevision.setBounds(390, 308, 287, 16);
-		panel.add(lblMinutosEnTelevision);
+		lblMinutos = new JLabel("Minutos");
+		lblMinutos.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblMinutos.setBounds(402, 286, 86, 16);
+		panel.add(lblMinutos);
+
+		lblHsCentral = new JLabel("Hs. Central");
+		lblHsCentral.setBounds(471, 295, 94, 14);
+		panel.add(lblHsCentral);
 
 		minHsCentral = new JTextField("" + medioTradicional.getMinsHorarioCentral());
 		minHsCentral.setEditable(false);
-		minHsCentral.setBounds(485, 327, 36, 22);
+		minHsCentral.setBounds(471, 313, 62, 22);
 		panel.add(minHsCentral);
 		minHsCentral.setColumns(10);
 
+		lblTelevision = new JLabel("Television");
+		lblTelevision.setBounds(572, 295, 101, 14);
+		panel.add(lblTelevision);
+
 		minTelevision = new JTextField("" + medioTradicional.getMinsTelevision());
 		minTelevision.setEditable(false);
-		minTelevision.setBounds(570, 327, 36, 22);
+		minTelevision.setBounds(572, 313, 62, 22);
 		panel.add(minTelevision);
 		minTelevision.setColumns(10);
 
+		lblEstrascendenteMT = new JLabel("EsTrascendente");
+		lblEstrascendenteMT.setBounds(400, 374, 133, 14);
+		if (medioTradicional.esTrascendente() == true) {
+			lblEstrascendenteMT.setText("Es trascendente.");
+		} else
+			lblEstrascendenteMT.setText("No es trascendente.");
+		panel.add(lblEstrascendenteMT);
+
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(579, 381, 94, 23);
+		btnVolver.setBounds(599, 381, 94, 23);
 		btnVolver.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				frame.setContentPane(new Consulta());
 				frame.validate();
 			}
 		});
 		panel.add(btnVolver);
-		
-		lblEstrascendenteMT = new JLabel("EsTrascendenteMT");
-		lblEstrascendenteMT.setBounds(405, 363, 75, 14);
-		if (medioTradicional.esTrascendente() == true ){
-			lblEstrascendenteMT.setText("Es trascendente");
-		}
-		else
-			lblEstrascendenteMT.setText("No es trascendente");
-		panel.add(lblEstrascendenteMT);
 
 	}
 }
