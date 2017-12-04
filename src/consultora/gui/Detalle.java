@@ -102,13 +102,13 @@ public class Detalle extends JSplitPane {
 
 		codigoTema = new JTextField(temaSelect.getCodigo());
 		codigoTema.setHorizontalAlignment(SwingConstants.LEFT);
-		codigoTema.setBounds(369, 13, 120, 32);
+		codigoTema.setBounds(370, 13, 120, 32);
 		codigoTema.setFont(new Font("Calibri", Font.PLAIN, 30));
 		codigoTema.setBorder(null);
 		codigoTema.setBackground(new Color(69, 193, 100));
 		barra.add(codigoTema);
 
-		JLabel lblPalabraClave = new JLabel("Palabra Clave");
+		JLabel lblPalabraClave = new JLabel("Palabra Clave:");
 		lblPalabraClave.setBounds(277, 53, 104, 20);
 		barra.add(lblPalabraClave);
 		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
@@ -120,6 +120,19 @@ public class Detalle extends JSplitPane {
 		palabraClave.setFont(new Font("Calibri", Font.PLAIN, 17));
 		palabraClave.setEditable(false);
 		barra.add(palabraClave);
+		
+		JLabel lblOperador = new JLabel("Operador:");
+		lblOperador.setBounds(10, 52, 83, 20);
+		barra.add(lblOperador);
+		lblOperador.setFont(new Font("Calibri", Font.PLAIN, 18));
+		
+		JTextField operador = new JTextField(medioTradicional.getOperador());
+		operador.setBounds(89, 53, 128, 21);
+		operador.setBorder(null);
+		operador.setBackground(new Color(69, 193, 100));
+		barra.add(operador);
+		operador.setFont(new Font("Calibri", Font.PLAIN, 17));
+		operador.setEditable(false);
 
 		/*
 		 * DETALLES
