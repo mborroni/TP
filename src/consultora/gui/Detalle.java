@@ -7,12 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -24,20 +23,17 @@ import com.toedter.calendar.JDateChooser;
 import consultora.objects.MediosActuales;
 import consultora.objects.MediosTradicionales;
 import consultora.objects.Tema;
-import javax.swing.JSlider;
-import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
 
 public class Detalle extends JSplitPane {
 
-	// TEMA
 	private JTextField codigoTema;
 	private JTextField palabraClave;
 	private JDateChooser fechaInicio;
 	private JDateChooser fechaFin;
 	private JTextArea descripcionTxtArea;
-	private JButton btnVolver;
+	
 	private JTextField redSocial;
 	private JTextField mgPublicacionApoyo;
 	private JTextField mgPublicacionNeutral;
@@ -45,14 +41,14 @@ public class Detalle extends JSplitPane {
 	private JTextField publicacionApoyo;
 	private JTextField publicacionNeutral;
 	private JTextField publicacionRechazo;
-	private JTextArea medioTradicional1;
+	private JTextField replicas;
+
+	private JTextArea apreciacion;
 	private JTextField cantNotasDiarios;
 	private JTextField cantTapasRevistas;
 	private JTextField minHsCentral;
 	private JTextField minTelevision;
-
-	private MediosActuales medioActual;
-	private MediosTradicionales medioTradicional;
+	
 	private JLabel lblApreciacin;
 	private JLabel lblCantidad;
 	private JLabel lblMinutos;
@@ -66,7 +62,12 @@ public class Detalle extends JSplitPane {
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel lblReplicas;
-	private JTextField replicas;
+
+	private JButton btnVolver;
+	
+	private MediosActuales medioActual;
+	private MediosTradicionales medioTradicional;
+
 
 	public Detalle(Tema temaSelect) {
 
@@ -162,7 +163,7 @@ public class Detalle extends JSplitPane {
 
 		descripcionTxtArea = new JTextArea(temaSelect.getDescripcion());
 		JScrollPane scrollpane = new JScrollPane(descripcionTxtArea);
-		scrollpane.setBounds(387, 36, 306, 54);
+		scrollpane.setBounds(387, 36, 302, 54);
 		descripcionTxtArea.setEditable(false);
 		panel.add(scrollpane);
 		lblSeguimiento.setFont(new Font("Calibri", Font.PLAIN, 18));
@@ -260,6 +261,7 @@ public class Detalle extends JSplitPane {
 		panel.add(lblReplicas);
 
 		replicas = new JTextField("" + medioActual.getReplicas());
+		replicas.setEditable(false);
 		replicas.setBounds(129, 336, 62, 20);
 		panel.add(replicas);
 
@@ -286,13 +288,13 @@ public class Detalle extends JSplitPane {
 
 		lblApreciacin = new JLabel("Apreciaci\u00F3n:");
 		lblApreciacin.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblApreciacin.setBounds(402, 137, 80, 16);
+		lblApreciacin.setBounds(402, 143, 80, 16);
 		panel.add(lblApreciacin);
 
-		medioTradicional1 = new JTextArea(medioTradicional.getApreciacion());
-		medioTradicional1.setEditable(false);
-		JScrollPane scrollPane = new JScrollPane(medioTradicional1);
-		scrollPane.setBounds(491, 134, 198, 71);
+		apreciacion = new JTextArea(medioTradicional.getApreciacion());
+		apreciacion.setEditable(false);
+		JScrollPane scrollPane = new JScrollPane(apreciacion);
+		scrollPane.setBounds(491, 143, 198, 62);
 		panel.add(scrollPane);
 
 		lblCantidad = new JLabel("Cantidad");
