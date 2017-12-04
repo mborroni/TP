@@ -162,7 +162,8 @@ public class Consulta extends JSplitPane {
 
 				if (mouseEvent.getClickCount() == 2) {
 
-					Tema temaSelect = temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.rowAtPoint(point), 0).toString());
+					Tema temaSelect = temaDAO
+							.obtenerTemaPorCodigo(table.getValueAt(table.rowAtPoint(point), 0).toString());
 					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) mouseEvent.getSource());
 					frame.setContentPane(new ModificarTema(temaSelect));
 					frame.validate();
@@ -253,9 +254,16 @@ public class Consulta extends JSplitPane {
 
 					Tema temaSelect = temaDAO
 							.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
-					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
-					frame.setContentPane(new ModificarSeguimiento(temaSelect));
-					frame.validate();
+
+					if (temaSelect.getSeguimientoMT() != null) {
+						JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) arg0.getSource());
+						frame.setContentPane(new ModificarSeguimiento(temaSelect));
+						frame.validate();
+					}
+					else {
+						JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnDetalle),
+								"Este tema no tiene ningún seguimiento cargado.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
 
 				} else {
 					JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(btnDetalle),

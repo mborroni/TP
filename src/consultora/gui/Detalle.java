@@ -35,9 +35,7 @@ public class Detalle extends JSplitPane {
 	private JDateChooser fechaInicio;
 	private JDateChooser fechaFin;
 	private JTextArea descripcionTxtArea;
-
-	private JButton btnCancelar;
-	private JButton btnAceptar;
+	private JButton btnVolver;
 	private JTextField redSocial;
 	private JTextField mgPublicacionApoyo;
 	private JTextField mgPublicacionNeutral;
@@ -56,22 +54,20 @@ public class Detalle extends JSplitPane {
 	private JLabel lblApreciacin;
 	private JLabel lblCantidadNotasDiarios;
 	private JLabel lblMinutosEnTelevision;
+	private JLabel lblEstrascendenteMT;
 
 	public Detalle(Tema temaSelect) {
-		
+
 		medioActual = temaSelect.getSeguimientoMA();
 		medioTradicional = temaSelect.getSeguimientoMT();
 
-		
-		if (medioActual == null){
+		if (medioActual == null) {
 			medioActual = new MediosActuales("", "", 0, 0, 0, 0, 0, 0, 0);
 		}
-		if (medioTradicional == null){
-			medioTradicional =  new MediosTradicionales("", "", 0, 0, 0, 0, "");
+		if (medioTradicional == null) {
+			medioTradicional = new MediosTradicionales("", "", 0, 0, 0, 0, "");
 		}
-			
-			
-			
+
 		setLayout(null);
 
 		/*
@@ -222,15 +218,33 @@ public class Detalle extends JSplitPane {
 		panel.add(publicacionRechazo);
 		publicacionRechazo.setColumns(10);
 		
-				JLabel lblMediosTradicionales = new JLabel("Medios Tradicionales");
-				lblMediosTradicionales.setFont(new Font("Calibri", Font.PLAIN, 18));
-				lblMediosTradicionales.setBounds(455, 175, 178, 16);
-				panel.add(lblMediosTradicionales);
-		
-				lblApreciacin = new JLabel("Apreciaci\u00F3n:");
-				lblApreciacin.setFont(new Font("Calibri", Font.PLAIN, 16));
-				lblApreciacin.setBounds(386, 198, 80, 16);
-				panel.add(lblApreciacin);
+		JLabel lblEsapoyado = new JLabel("");
+		lblEsapoyado.setBounds(29, 345, 94, 14);
+		if (medioActual.esApoyado()){
+			lblEsapoyado.setText("Fue apoyado en las redes sociales");
+		}
+		else
+			lblEsapoyado.setText("No fue apoyado en las redes sociales");
+		panel.add(lblEsapoyado);
+
+		JLabel lblEstrascendenteMA = new JLabel("EsTrascendente");
+		lblEstrascendenteMA.setBounds(178, 345, 164, 14);
+		if (medioActual.esTrascendente()){
+			lblEstrascendenteMA.setText("Es trascendente");
+		}
+		else
+			lblEstrascendenteMA.setText("No es trascendente");
+		panel.add(lblEstrascendenteMA);
+
+		JLabel lblMediosTradicionales = new JLabel("Medios Tradicionales");
+		lblMediosTradicionales.setFont(new Font("Calibri", Font.PLAIN, 18));
+		lblMediosTradicionales.setBounds(455, 175, 178, 16);
+		panel.add(lblMediosTradicionales);
+
+		lblApreciacin = new JLabel("Apreciaci\u00F3n:");
+		lblApreciacin.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblApreciacin.setBounds(386, 198, 80, 16);
+		panel.add(lblApreciacin);
 
 		medioTradicional1 = new JTextArea(medioTradicional.getApreciacion());
 		JScrollPane scrollPane = new JScrollPane(medioTradicional1);
@@ -270,36 +284,29 @@ public class Detalle extends JSplitPane {
 		minTelevision.setBounds(570, 327, 36, 22);
 		panel.add(minTelevision);
 		minTelevision.setColumns(10);
+
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(579, 381, 94, 23);
+		btnVolver.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				frame.setContentPane(new Consulta());
+				frame.validate();
+			}
+		});
+		panel.add(btnVolver);
 		
-				btnCancelar = new JButton("Cancelar");
-				btnCancelar.setBounds(616, 372, 94, 23);
-				btnCancelar.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-
-						JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-						frame.setContentPane(new Consulta());
-						frame.validate();
-					}
-				});
-				panel.add(btnCancelar);
-				
-						btnAceptar = new JButton("Aceptar");
-						btnAceptar.setBounds(512, 372, 94, 23);
-						btnAceptar.addActionListener(new ActionListener() {
-
-							@Override
-							public void actionPerformed(ActionEvent e) {
-
-								JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-								frame.setContentPane(new Consulta());
-								frame.validate();
-							}
-						});
-						panel.add(btnAceptar);
+		lblEstrascendenteMT = new JLabel("EsTrascendenteMT");
+		lblEstrascendenteMT.setBounds(405, 363, 75, 14);
+		if (medioTradicional.esTrascendente() == true ){
+			lblEstrascendenteMT.setText("Es trascendente");
+		}
+		else
+			lblEstrascendenteMT.setText("No es trascendente");
+		panel.add(lblEstrascendenteMT);
 
 	}
-	
-
 }
