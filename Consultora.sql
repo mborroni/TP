@@ -46,6 +46,8 @@ insert into operador (nombre, apellido) values ("Ramiro","Capria");
 insert into operador (nombre, apellido) values ("Gabriel","Gimenez");
 insert into operador (nombre, apellido) values ("Francisco","Piccina");
 
+
+
 insert into  medios_actuales values ("","Twitter","400","12000","600","300","3000","900","16000");
-insert into  medios_actuales values ("","Facebook","2000","6000","260","200","400","800","12000");
+insert into  medios_actuales values ("","Facebook","2000","6000","2060","200","400","800","17000");
 insert into  medios_actuales values ("","Instagram","1200","800","160","500","190","700","10000");

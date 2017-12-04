@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import consultora.TextPrompt;
 import consultora.dao.TemaDAO;
@@ -127,10 +128,12 @@ public class Consulta extends JSplitPane {
 		add(panel);
 
 		model = new DefaultTableModel() {
+		
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
+
 		};
 
 		table = new JTable(model);
@@ -140,18 +143,18 @@ public class Consulta extends JSplitPane {
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		
 		model.addColumn("Codigo tema");
 		model.addColumn("Palabra clave");
 		model.addColumn("Inicio");
 		model.addColumn("Fin");
-
+		
 		agregarTemas(temaDAO.obtenerTemas());
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(180, 10, 537, 382);
 		scrollPane.setViewportBorder(null);
 		scrollPane.getViewport().setBackground(new Color(252, 252, 252));
-		;
 		panel.add(scrollPane);
 
 		table.addMouseListener(new MouseAdapter() {
@@ -338,6 +341,7 @@ public class Consulta extends JSplitPane {
 			Object[] v = { temas.get(i).getCodigo(), temas.get(i).getPalabraClave(), temas.get(i).getInicio(),
 					temas.get(i).getFin() };
 			model.addRow(v);
+			
 
 		}
 	}
