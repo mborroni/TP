@@ -86,25 +86,23 @@ public class MediosTradicionalesDAO extends SeguimientoDAO{
 	 * UPDATE TEMA
 	 */	
 	
-	public void actualizarSeguimiento(Seguimiento seguimiento) {
+	public void updateSeguimiento(Seguimiento seguimiento) {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-			
+
 			MediosTradicionales seguimientoMT = (MediosTradicionales) seguimiento;
 			
-			PreparedStatement ps = conn.prepareStatement("UPDATE medios_tradicionales SET apellido=?, "
-					+ "mintv=?, mincentral=?, cant_notas=?, cant_tapas=?, apreciacion=? WHERE cod_tema=?");
-			ps.setString(1, seguimientoMT.getOperador());
-			ps.setInt(2, seguimientoMT.getMinsTelevision());
-			ps.setInt(3, seguimientoMT.getMinsHorarioCentral());
-			ps.setInt(4, seguimientoMT.getCantNotasDiarios());
-			ps.setInt(5, seguimientoMT.getCantTapasRevistas());
-			ps.setString(6, seguimientoMT.getApreciacion());		
-			ps.setString(7, seguimientoMT.getCodigo());
+			String query = "UPDATE medios_tradicionales SET mintv = ?, mincentral = ?, cant_notas = ?, cant_tapas = ?, apreciacion = ? WHERE cod_tema LIKE '"+ seguimientoMT.getCodigo() +"%'";
+			
+			PreparedStatement ps = (PreparedStatement) conn.prepareStatement(query);
+			ps.setInt(1, seguimientoMT.getMinsTelevision());
+			ps.setInt(2, seguimientoMT.getMinsHorarioCentral());
+			ps.setInt(3, seguimientoMT.getCantNotasDiarios());
+			ps.setInt(4, seguimientoMT.getCantTapasRevistas());
+			ps.setString(5, seguimientoMT.getApreciacion());
 			ps.executeUpdate();
-	        
 			conn.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

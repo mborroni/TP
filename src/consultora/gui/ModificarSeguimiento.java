@@ -46,7 +46,6 @@ public class ModificarSeguimiento extends JPanel {
 	private JLabel lblApreciacin;
 	private JLabel lblCantidadNotasDiarios;
 	private JLabel lblMinutosEnTelevision;
-	private MediosTradicionalesDAO mtDAO;
 
 	public ModificarSeguimiento(Tema temaSelect) {
 
@@ -214,13 +213,13 @@ public class ModificarSeguimiento extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Seguimiento seguimientoMT = new MediosTradicionales(temaSelect.getCodigo(), "",
+				Seguimiento seguimientoMT = new MediosTradicionales(temaSelect.getCodigo(), "" ,
 						Integer.parseInt(minTelevision.getText()), Integer.parseInt(minHsCentral.getText()),
 						Integer.parseInt(cantNotasDiarios.getText()), Integer.parseInt(cantTapasRevista.getText()),
-						apreciacion.getText());
+						(String)apreciacion.getText());
 				
-				
-				mtDAO.actualizarSeguimiento(seguimientoMT);
+				MediosTradicionalesDAO mtDAO = new MediosTradicionalesDAO();
+				mtDAO.updateSeguimiento(seguimientoMT);
 				
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				frame.setContentPane(new Consulta());
