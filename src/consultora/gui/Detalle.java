@@ -1,4 +1,4 @@
-package consultora.gui;
+package src.consultora.gui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -20,9 +20,9 @@ import javax.swing.SwingUtilities;
 
 import com.toedter.calendar.JDateChooser;
 
-import consultora.objects.MediosActuales;
-import consultora.objects.MediosTradicionales;
-import consultora.objects.Tema;
+import src.consultora.objects.MediosTradicionales;
+import src.consultora.objects.Tema;
+import src.consultora.objects.MediosActuales;
 
 @SuppressWarnings("serial")
 

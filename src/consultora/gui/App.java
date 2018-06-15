@@ -1,4 +1,4 @@
-package consultora.gui;
+package src.consultora.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,8 +38,8 @@ public class App extends JFrame {
 
 		setFont(new Font("Calibri", Font.PLAIN, 13));
 		setTitle("Consultora");
-		ImageIcon img = (new ImageIcon(this.getClass().getResource("/home.png")));
-		setIconImage(img.getImage());
+		//ImageIcon img = (new ImageIcon(this.getClass().getResource("images/home.png")));
+		//setIconImage(img.getImage());
 		setSize(750, 550);
 		setResizable(false);
 		setLocationRelativeTo(null);

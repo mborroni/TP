@@ -1,6 +1,6 @@
-package consultora.dao;
+package src.consultora.dao;
 
-import consultora.objects.Seguimiento;
+import src.consultora.objects.Seguimiento;
 
 public abstract class SeguimientoDAO {
 	

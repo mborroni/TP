@@ -1,4 +1,4 @@
-package consultora.objects;
+package src.consultora.objects;
 
 public class MediosTradicionales extends Seguimiento{
 	

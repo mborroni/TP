@@ -1,4 +1,4 @@
-package consultora.dao;
+package src.consultora.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,8 +9,8 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-import consultora.objects.MediosTradicionales;
-import consultora.objects.Seguimiento;
+import src.consultora.objects.MediosTradicionales;
+import src.consultora.objects.Seguimiento;
 
 public class MediosTradicionalesDAO extends SeguimientoDAO{
 	

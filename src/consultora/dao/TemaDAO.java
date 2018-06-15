@@ -1,4 +1,4 @@
-package consultora.dao;
+package src.consultora.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import consultora.objects.MediosActuales;
-import consultora.objects.MediosTradicionales;
-import consultora.objects.Tema;
+import src.consultora.objects.MediosTradicionales;
+import src.consultora.objects.Tema;
+import src.consultora.objects.MediosActuales;
 
 public class TemaDAO {
 

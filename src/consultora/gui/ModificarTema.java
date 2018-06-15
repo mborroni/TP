@@ -1,4 +1,4 @@
-package consultora.gui;
+package src.consultora.gui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -18,8 +18,8 @@ import javax.swing.SwingUtilities;
 
 import com.toedter.calendar.JDateChooser;
 
-import consultora.dao.TemaDAO;
-import consultora.objects.Tema;
+import src.consultora.dao.TemaDAO;
+import src.consultora.objects.Tema;
 
 @SuppressWarnings("serial")
 

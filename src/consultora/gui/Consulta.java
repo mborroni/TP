@@ -1,4 +1,4 @@
-package consultora.gui;
+package src.consultora.gui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -30,8 +30,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import consultora.TextPrompt;
-import consultora.dao.TemaDAO;
-import consultora.objects.Tema;
+import src.consultora.dao.TemaDAO;
+import src.consultora.objects.Tema;
 
 @SuppressWarnings("serial")
 
@@ -93,7 +93,7 @@ public class Consulta extends JSplitPane {
 		barra.add(busquedaTxtFld);
 
 		imagebutton = new JButton();
-		imagebutton.setIcon(new ImageIcon(this.getClass().getResource("/searcher1.png")));
+		imagebutton.setIcon(new ImageIcon(this.getClass().getResource("/images/searcher1.png")));
 		imagebutton.setBounds(687, 28, 31, 29);
 		imagebutton.setBorder(new EmptyBorder(0, 0, 0, 0));
 		imagebutton.setBackground(new Color(65, 182, 94));
@@ -201,7 +201,7 @@ public class Consulta extends JSplitPane {
 		btnCrearTema = new JButton("Añadir tema");
 		btnCrearTema.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCrearTema.setBounds(3, 77, 154, 33);
-		btnCrearTema.setIcon(new ImageIcon(this.getClass().getResource("/NuevoTema.png")));
+		btnCrearTema.setIcon(new ImageIcon(this.getClass().getResource("/images/NuevoTema.png")));
 		btnCrearTema.setOpaque(false);
 		btnCrearTema.setContentAreaFilled(false);
 		btnCrearTema.setBorderPainted(false);
@@ -224,7 +224,7 @@ public class Consulta extends JSplitPane {
 		});
 		btnCrearSeguimiento.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCrearSeguimiento.setBounds(0, 126, 181, 33);
-		btnCrearSeguimiento.setIcon(new ImageIcon(this.getClass().getResource("/NuevoSeguimiento.png")));
+		btnCrearSeguimiento.setIcon(new ImageIcon(this.getClass().getResource("/images/NuevoSeguimiento.png")));
 		btnCrearSeguimiento.setOpaque(false);
 		btnCrearSeguimiento.setContentAreaFilled(false);
 		btnCrearSeguimiento.setBorderPainted(false);
@@ -242,7 +242,7 @@ public class Consulta extends JSplitPane {
 		btnModificar = new JButton("Modificar seg.");
 		btnModificar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnModificar.setBounds(3, 170, 157, 33);
-		btnModificar.setIcon(new ImageIcon(this.getClass().getResource("/Modificar.png")));
+		btnModificar.setIcon(new ImageIcon(this.getClass().getResource("/images/Modificar.png")));
 		btnModificar.setOpaque(false);
 		btnModificar.setContentAreaFilled(false);
 		btnModificar.setBorderPainted(false);
@@ -277,7 +277,7 @@ public class Consulta extends JSplitPane {
 		btnEliminar = new JButton("Eliminar tema");
 		btnEliminar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnEliminar.setBounds(0, 212, 155, 33);
-		btnEliminar.setIcon(new ImageIcon(this.getClass().getResource("/Eliminar.png")));
+		btnEliminar.setIcon(new ImageIcon(this.getClass().getResource("/images/Eliminar.png")));
 		btnEliminar.setOpaque(false);
 		btnEliminar.setContentAreaFilled(false);
 		btnEliminar.setBorderPainted(false);

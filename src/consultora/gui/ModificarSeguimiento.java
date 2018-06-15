@@ -1,4 +1,4 @@
-package consultora.gui;
+package src.consultora.gui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -16,11 +16,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import consultora.dao.MediosTradicionalesDAO;
-import consultora.objects.MediosActuales;
-import consultora.objects.MediosTradicionales;
-import consultora.objects.Seguimiento;
-import consultora.objects.Tema;
+import src.consultora.dao.MediosTradicionalesDAO;
+import src.consultora.objects.MediosTradicionales;
+import src.consultora.objects.Seguimiento;
+import src.consultora.objects.Tema;
+import src.consultora.objects.MediosActuales;
+
 import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")

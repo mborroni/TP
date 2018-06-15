@@ -1,4 +1,4 @@
-package consultora.dao;
+package src.consultora.dao;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,8 +8,8 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
-import consultora.objects.MediosActuales;
-import consultora.objects.Seguimiento;
+import src.consultora.objects.Seguimiento;
+import src.consultora.objects.MediosActuales;
 
 public class MediosActualesDAO extends SeguimientoDAO{
 

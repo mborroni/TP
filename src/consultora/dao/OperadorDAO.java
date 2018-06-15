@@ -1,4 +1,4 @@
-package consultora.dao;
+package src.consultora.dao;
 
 
 import java.sql.DriverManager;

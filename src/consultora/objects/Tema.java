@@ -1,4 +1,4 @@
-package consultora.objects;
+package src.consultora.objects;
 import java.util.Date;
 import java.time.Instant;
 import java.time.LocalDate;
